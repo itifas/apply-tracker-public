@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum StepStatus {
+  Pending
+  Passed
+  Rejected
+}
+
+enum FinalStatus {
+  Applied
+  Interviewing
+  Rejected
+  OFFER
+  Ghosted
+}
+
+enum ReminderType {
+  FollowUp3Days
+  FollowUp7Days
+  FollowUp14Days
+  Ghosted30Days
+  Custom
+}
+
+enum CalendarProvider {
+  Google
+  Outlook
+  ICS
+}
+
+enum EmailProvider {
+  Gmail
+  Outlook
+}
+
+model User {
+  id           String        @id @default(cuid())
+  username     String        @unique
+  email        String?       @unique
+  passwordHash String
+  fullName     String?
+  applications Application[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Application {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company         String
+  roleTitle       String
+  location        String?
+  applicationLink String?
+  dateApplied     DateTime
+  contactPerson   String?
+  contactInfo     String?
+  salary          String?
+  step1Status     StepStatus  @default(Pending)
+  step2Status     StepStatus  @default(Pending)
+  step3Status     StepStatus  @default(Pending)
+  finalStatus     FinalStatus @default(Applied)
+  nextFollowUp    DateTime?
+  notes           String?
+  source          String?
+  reminders       Reminder[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model Reminder {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reminderDate  DateTime
+  reminderType  ReminderType
+  completed     Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+}
+
+model CalendarConnection {
+  id          String           @id @default(cuid())
+  provider    CalendarProvider
+  syncEnabled Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+}
+
+model EmailConnection {
+  id           String        @id @default(cuid())
+  provider     EmailProvider
+  accountEmail String
+  syncEnabled  Boolean       @default(false)
+  lastSyncedAt DateTime?
+}

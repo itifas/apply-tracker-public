@@ -1,0 +1,51 @@
+# Secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Node/Next artifacts
+**/node_modules/
+**/.next/
+**/tsconfig.tsbuildinfo
+
+# Build outputs
+**/dist/
+**/build/
+**/out/
+
+# Logs
+**/*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test coverage
+**/coverage/
+**/.nyc_output/
+
+# Cache
+**/.cache/
+**/.turbo/
+**/.parcel-cache/
+**/.eslintcache
+
+# Local database files
+**/*.db
+**/*.db-journal
+**/*.sqlite
+**/*.sqlite3
+
+# Docker/local data
+/docker-data/
+/volumes/
+/.pgdata/
+/postgres-data/
+/tmp/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
