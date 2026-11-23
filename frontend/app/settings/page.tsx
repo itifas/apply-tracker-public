@@ -1,5 +1,7 @@
 "use client";
 
+import { InProgressBadge, useComingSoon } from "@/components/feedback/in-progress";
+
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { AppShell } from "@/components/layout/app-shell";
@@ -18,6 +20,7 @@ import {
 } from "lucide-react";
 
 export default function SettingsPage() {
+	const comingSoon = useComingSoon();
 	const { theme, setTheme } = useTheme();
 	const { palette, setPalette, mounted } = usePalette();
 	const [mountedTheme, setMountedTheme] = useState(false);
@@ -398,7 +401,10 @@ export default function SettingsPage() {
 							<span className="text-sm font-medium text-primary">Export</span>
 						</button>
 
-						<button className="flex w-full items-center justify-between rounded-lg border border-border p-3 transition-colors hover:bg-surfaceAlt">
+						<button
+							onClick={comingSoon("Backup")}
+							className="flex w-full items-center justify-between rounded-lg border border-border p-3 transition-colors hover:bg-surfaceAlt"
+						>
 							<div className="flex items-center gap-3">
 								<Download className="text-textSoft" size={20} />
 								<div className="text-left">
@@ -413,7 +419,7 @@ export default function SettingsPage() {
 							<span className="text-sm font-medium text-primary">Backup</span>
 						</button>
 
-						<button className="flex w-full items-center justify-between rounded-lg border-2 border-red-200 bg-red-50 p-3 transition-colors hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:hover:bg-red-900/30">
+						<button onClick={comingSoon("Deleting all data")} className="flex w-full items-center justify-between rounded-lg border-2 border-red-200 bg-red-50 p-3 transition-colors hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:hover:bg-red-900/30">
 							<div className="flex items-center gap-3">
 								<Trash2 className="text-red-600" size={20} />
 								<div className="text-left">
@@ -431,7 +437,10 @@ export default function SettingsPage() {
 				</div>
 
 				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
-					<h2 className="mb-4 text-lg font-semibold text-textMain">Account</h2>
+					<h2 className="mb-4 text-lg font-semibold text-textMain">
+						Account
+						<InProgressBadge />
+					</h2>
 					<div className="space-y-4">
 						<div>
 							<label className="mb-2 block text-sm font-medium text-textMain">
@@ -453,7 +462,10 @@ export default function SettingsPage() {
 								className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
 							/>
 						</div>
-						<button className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover">
+						<button
+							onClick={comingSoon("Saving account details")}
+							className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover"
+						>
 							Save Changes
 						</button>
 					</div>

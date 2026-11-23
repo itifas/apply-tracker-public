@@ -2,6 +2,7 @@
 
 import { applicationHref } from "@/lib/demo/config";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { FinalStatus, StepStatus } from "@prisma/client";
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
@@ -63,6 +64,15 @@ export function ApplicationsView() {
 	const toast = useToast();
 	const [applications, setApplications] = useState<ApplicationRecord[]>([]);
 	const [query, setQuery] = useState("");
+	const searchParams = useSearchParams();
+	const urlQuery = searchParams.get("q");
+
+	// Pick up searches made from the top bar (/applications?q=...).
+	useEffect(() => {
+		if (urlQuery !== null) {
+			setQuery(urlQuery);
+		}
+	}, [urlQuery]);
 	const [status, setStatus] = useState("all");
 	const [sortBy, setSortBy] = useState("dateApplied");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");

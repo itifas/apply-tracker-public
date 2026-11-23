@@ -1,7 +1,7 @@
 # Builds the desktop app when a platform branch is updated:
 #   windows -> .exe installer
 #   macos   -> .dmg and .zip (Intel and Apple Silicon)
-#   linux   -> .AppImage
+#   linux   -> .AppImage, .deb (Debian/Ubuntu), .rpm (Fedora)
 #
 # The installer is added to the GitHub Release for the version in
 # desktop/package.json (e.g. v0.1.0), creating the release if needed, so all
@@ -53,6 +53,10 @@ jobs:
         run: npm run build:web
         working-directory: desktop
 
+      - name: Install Linux packaging tools
+        if: github.ref_name == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y rpm
+
       - name: Build installer
         shell: bash
         run: |
@@ -76,6 +80,8 @@ jobs:
             desktop/dist/*.dmg
             desktop/dist/*.zip
             desktop/dist/*.AppImage
+            desktop/dist/*.deb
+            desktop/dist/*.rpm
             desktop/dist/*.blockmap
             desktop/dist/latest*.yml
 
@@ -89,7 +95,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: desktop/package.json
+          sparse-checkout: |
+            desktop/package.json
+            desktop/RELEASE_NOTES.md
 
       - uses: actions/download-artifact@v4
         with:
@@ -100,10 +108,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tag="v$(node -p "require('./desktop/package.json').version")"
-          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+          version="$(node -p "require('./desktop/package.json').version")"
+          tag="v$version"
+          url="https://github.com/$GITHUB_REPOSITORY/releases/download/$tag"
+          sed -e "s|{{VERSION}}|$tag|g" -e "s|{{V}}|$version|g" -e "s|{{URL}}|$url|g" \
+            desktop/RELEASE_NOTES.md > notes.md
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --notes-file notes.md
+          else
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" \
-              --target "$GITHUB_SHA" --title "Apply Tracker $tag" \
-              --notes "Download the installer for your system below."
+              --target "$GITHUB_SHA" --title "Apply Tracker $tag" --notes-file notes.md
           fi
           gh release upload "$tag" dist/* --repo "$GITHUB_REPOSITORY" --clobber

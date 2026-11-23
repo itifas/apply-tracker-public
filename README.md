@@ -11,6 +11,22 @@ Apply Tracker is a local-first job application tracker for managing applications
 - Not production-ready yet.
 - Version 1.0 will focus on unfinished/scaffolded flows, data correctness checks, and production polish.
 
+## Try It
+
+- **Web demo:** https://tracker.iakovostifas.com. It runs in your browser with sample data, so there's nothing to install.
+- **Desktop app:** [download the latest release](https://github.com/itifas/apply-tracker-public/releases/latest).
+
+| System | File |
+|---|---|
+| Windows 10/11 | `Apply-Tracker-Setup-<version>.exe` |
+| macOS, Apple Silicon (M1–M4) | `Apply-Tracker-<version>-mac-arm64.dmg` |
+| macOS, Intel | `Apply-Tracker-<version>-mac-x64.dmg` |
+| Debian, Ubuntu, Mint | `Apply-Tracker-<version>-linux-amd64.deb` |
+| Fedora, RHEL, openSUSE | `Apply-Tracker-<version>-linux-x86_64.rpm` |
+| Any Linux | `Apply-Tracker-<version>-linux-x86_64.AppImage` |
+
+The release page has step-by-step install instructions for each system.
+
 ## Features
 
 - Track companies, roles, locations, application links, contacts, notes, salaries, sources, and application dates.
@@ -107,15 +123,14 @@ The app container uses `backend/config/.env` via Docker Compose. Do not commit r
 | Branch | Purpose |
 |---|---|
 | `main` | All source code and documentation. Work happens here. |
-| `web-demo` | Deployed by Cloudflare to `tracker.iakovostifas.com`. |
+| `web-demo` | Deployed by Cloudflare to `tracker.iakovostifas.com`. Updated automatically from `main` on every push. |
 | `windows` | Pushing builds the Windows installer (`.exe`). |
 | `macos` | Pushing builds the macOS app (`.dmg`, `.zip`). |
 | `linux` | Pushing builds the Linux app (`.AppImage`). |
 
-The release branches hold the same code as `main`. Update them from `main` when you want to publish:
+The release branches hold the same code as `main`. The web demo updates itself (the `Update web demo` workflow copies `main` to `web-demo` after every push). Update the desktop branches from `main` when you want to publish an app version:
 
 ```sh
-git push origin main:web-demo   # redeploy the web demo
 git push origin main:windows    # build and release Windows
 git push origin main:macos      # build and release macOS
 git push origin main:linux      # build and release Linux

@@ -1,5 +1,7 @@
 "use client";
 
+import { useComingSoon } from "@/components/feedback/in-progress";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
@@ -33,6 +35,7 @@ const primaryButtonClass =
 	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover";
 
 export function ApplicationDetail({ id }: { id: string | null }) {
+	const comingSoon = useComingSoon();
 	const [application, setApplication] = useState<ApplicationRecord | null>(
 		null,
 	);
@@ -509,8 +512,18 @@ export function ApplicationDetail({ id }: { id: string | null }) {
 								<Link href="/reminders" className={primaryButtonClass}>
 									Set Reminder
 								</Link>
-								<button className={neutralButtonClass}>Add Note</button>
-								<button className={neutralButtonClass}>Update Status</button>
+								<button
+									onClick={comingSoon("Adding notes")}
+									className={neutralButtonClass}
+								>
+									Add Note
+								</button>
+								<button
+									onClick={comingSoon("Quick status updates")}
+									className={neutralButtonClass}
+								>
+									Update Status
+								</button>
 							</div>
 						</div>
 

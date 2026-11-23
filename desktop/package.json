@@ -1,9 +1,12 @@
 {
 	"name": "apply-tracker-desktop",
 	"productName": "Apply Tracker",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Apply Tracker for Windows",
-	"author": "Iakovos Tifas",
+	"author": {
+		"name": "Iakovos Tifas",
+		"email": "itifas@users.noreply.github.com"
+	},
 	"license": "MIT",
 	"private": true,
 	"main": "main.js",
@@ -64,11 +67,15 @@
 		},
 		"linux": {
 			"target": [
-				"AppImage"
+				"AppImage",
+				"deb",
+				"rpm"
 			],
 			"category": "Office",
-			"artifactName": "Apply-Tracker-${version}-linux-${arch}.${ext}",
-			"syncDesktopName": true
+			"maintainer": "Iakovos Tifas <itifas@users.noreply.github.com>",
+			"synopsis": "Track job applications, interviews and follow-ups",
+			"syncDesktopName": true,
+			"artifactName": "Apply-Tracker-${version}-linux-${arch}.${ext}"
 		}
 	},
 	"dependencies": {

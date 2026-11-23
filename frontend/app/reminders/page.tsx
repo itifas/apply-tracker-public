@@ -1,5 +1,7 @@
 "use client";
 
+import { InProgressBadge, useComingSoon } from "@/components/feedback/in-progress";
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { format, parseISO, isPast, isToday, isTomorrow } from "date-fns";
 import { AppShell } from "@/components/layout/app-shell";
@@ -69,6 +71,7 @@ const reminderThemeMap = {
 } as const;
 
 export default function RemindersPage() {
+	const comingSoon = useComingSoon();
 	const [reminders, setReminders] = useState<ReminderItem[]>([]);
 	const [applications, setApplications] = useState<ApplicationOption[]>([]);
 	const [applicationId, setApplicationId] = useState("");
@@ -582,9 +585,12 @@ export default function RemindersPage() {
 						<div className={`${shellPanelClass} p-5 sm:p-6`}>
 							<h2 className="mb-4 text-lg font-semibold text-textMain">
 								Auto-Reminder Rules
+								<InProgressBadge />
 							</h2>
 							<p className="mb-4 text-sm text-textSoft">
-								Automatically create reminders based on application status
+								Automatically create reminders based on application status.
+								Only the follow-up rule works for now; the others are coming
+								soon.
 							</p>
 							<div className="space-y-3">
 								{[
@@ -639,7 +645,10 @@ export default function RemindersPage() {
 								Calendar Integration
 							</h2>
 							<div className="space-y-3">
-								<button className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt">
+								<button
+									onClick={comingSoon("Google Calendar sync")}
+									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
+								>
 									<div className="flex items-center gap-3">
 										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-semibold text-white">
 											G
@@ -648,13 +657,16 @@ export default function RemindersPage() {
 											<p className="text-sm font-medium text-textMain">
 												Google Calendar
 											</p>
-											<p className="text-xs text-textSoft">Connected</p>
+											<p className="text-xs text-textSoft">Coming soon</p>
 										</div>
 									</div>
-									<div className="h-2 w-2 rounded-full bg-success" />
+									<InProgressBadge />
 								</button>
 
-								<button className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt">
+								<button
+									onClick={comingSoon("Outlook Calendar sync")}
+									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
+								>
 									<div className="flex items-center gap-3">
 										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary font-semibold text-white">
 											O
@@ -663,12 +675,10 @@ export default function RemindersPage() {
 											<p className="text-sm font-medium text-textMain">
 												Outlook Calendar
 											</p>
-											<p className="text-xs text-textSoft">Not connected</p>
+											<p className="text-xs text-textSoft">Coming soon</p>
 										</div>
 									</div>
-									<span className="text-xs font-medium text-primary">
-										Connect
-									</span>
+									<InProgressBadge />
 								</button>
 
 								<button

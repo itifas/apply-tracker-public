@@ -1,0 +1,26 @@
+# Keeps the web-demo branch in sync with main, so Cloudflare redeploys
+# tracker.iakovostifas.com after every push to main.
+name: Update web demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-web-demo
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Point web-demo at main
+        run: git push --force origin HEAD:refs/heads/web-demo

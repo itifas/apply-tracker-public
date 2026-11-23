@@ -1,5 +1,7 @@
 "use client";
 
+import { InProgressNotice, useComingSoon } from "@/components/feedback/in-progress";
+
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
 import {
@@ -49,6 +51,7 @@ const sampleDetectedEmails = [
 ];
 
 export default function EmailIntegrationPage() {
+	const comingSoon = useComingSoon();
 	const [data, setData] = useState<EmailData | null>(null);
 
 	useEffect(() => {
@@ -60,6 +63,10 @@ export default function EmailIntegrationPage() {
 
 	return (
 		<AppShell>
+			<InProgressNotice title="Email integration is in progress">
+				The accounts, sync status and emails on this page are example data.
+				Connecting Gmail or Outlook isn&apos;t available yet.
+			</InProgressNotice>
 			<div className="space-y-6">
 				{/* Header */}
 				<div>
@@ -93,7 +100,7 @@ export default function EmailIntegrationPage() {
 									</p>
 								</div>
 							</div>
-							<button className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
+							<button onClick={comingSoon("Disconnecting Gmail")} className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
 								Disconnect
 							</button>
 						</div>
@@ -123,7 +130,7 @@ export default function EmailIntegrationPage() {
 								</span>
 							</div>
 						</div>
-						<button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+						<button onClick={comingSoon("Email sync")} className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
 							Sync Now
 						</button>
 					</div>
@@ -153,7 +160,7 @@ export default function EmailIntegrationPage() {
 							Connect your Outlook account to sync application-related
 							emails automatically.
 						</p>
-						<button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+						<button onClick={comingSoon("Outlook integration")} className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
 							Connect Outlook
 						</button>
 					</div>
@@ -273,10 +280,10 @@ export default function EmailIntegrationPage() {
 									</div>
 								</div>
 								<div className="flex items-center gap-2">
-									<button className="px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 rounded-lg transition-colors">
+									<button onClick={comingSoon("Viewing emails")} className="px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 rounded-lg transition-colors">
 										View
 									</button>
-									<button className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-900 dark:text-gray-100">
+									<button onClick={comingSoon("Updating status from email")} className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-900 dark:text-gray-100">
 										Update Status
 									</button>
 								</div>
