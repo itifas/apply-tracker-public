@@ -16,6 +16,8 @@ concurrency:
 
 jobs:
   sync:
+    # Only in the public repo; the private copy has no web demo.
+    if: github.repository == 'itifas/apply-tracker-public'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
