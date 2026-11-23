@@ -13,7 +13,7 @@ export default function Error({ reset }: { error: Error; reset: () => void }) {
 					The page failed to load. Try again.
 				</p>
 				<button
-					className="mt-5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primaryHover"
+					className="mt-5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition hover:bg-primaryHover"
 					onClick={reset}
 				>
 					Retry

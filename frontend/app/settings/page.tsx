@@ -258,6 +258,7 @@ export default function SettingsPage() {
 								<label className="relative inline-flex cursor-pointer items-center">
 									<input
 										type="checkbox"
+										aria-label={notification.title}
 										className="peer sr-only"
 										defaultChecked={notification.on}
 									/>
@@ -277,10 +278,13 @@ export default function SettingsPage() {
 					</div>
 					<div className="space-y-4">
 						<div>
-							<label className="mb-2 block text-sm font-medium text-textMain">
+							<label
+								htmlFor="default-follow-up"
+								className="mb-2 block text-sm font-medium text-textMain"
+							>
 								Default follow-up time
 							</label>
-							<select className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
+							<select id="default-follow-up" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
 								<option>3 days after applying</option>
 								<option>5 days after applying</option>
 								<option>7 days after applying</option>
@@ -288,10 +292,13 @@ export default function SettingsPage() {
 							</select>
 						</div>
 						<div>
-							<label className="mb-2 block text-sm font-medium text-textMain">
+							<label
+								htmlFor="reminder-time"
+								className="mb-2 block text-sm font-medium text-textMain"
+							>
 								Reminder time of day
 							</label>
-							<select className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
+							<select id="reminder-time" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
 								<option>9:00 AM</option>
 								<option>12:00 PM</option>
 								<option>3:00 PM</option>
@@ -421,17 +428,17 @@ export default function SettingsPage() {
 
 						<button onClick={comingSoon("Deleting all data")} className="flex w-full items-center justify-between rounded-lg border-2 border-red-200 bg-red-50 p-3 transition-colors hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:hover:bg-red-900/30">
 							<div className="flex items-center gap-3">
-								<Trash2 className="text-red-600" size={20} />
+								<Trash2 className="text-red-700 dark:text-red-300" size={20} />
 								<div className="text-left">
 									<p className="text-sm font-medium text-textMain">
 										Delete all data
 									</p>
-									<p className="text-xs text-red-600">
+									<p className="text-xs text-red-700 dark:text-red-300">
 										Permanently delete all applications
 									</p>
 								</div>
 							</div>
-							<span className="text-sm font-medium text-red-600">Delete</span>
+							<span className="text-sm font-medium text-red-700 dark:text-red-300">Delete</span>
 						</button>
 					</div>
 				</div>
@@ -443,20 +450,28 @@ export default function SettingsPage() {
 					</h2>
 					<div className="space-y-4">
 						<div>
-							<label className="mb-2 block text-sm font-medium text-textMain">
+							<label
+								htmlFor="account-name"
+								className="mb-2 block text-sm font-medium text-textMain"
+							>
 								Name
 							</label>
 							<input
+								id="account-name"
 								type="text"
 								defaultValue="Alex Student"
 								className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
 							/>
 						</div>
 						<div>
-							<label className="mb-2 block text-sm font-medium text-textMain">
+							<label
+								htmlFor="account-email"
+								className="mb-2 block text-sm font-medium text-textMain"
+							>
 								Email
 							</label>
 							<input
+								id="account-email"
 								type="email"
 								defaultValue="alex@university.edu"
 								className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
@@ -464,7 +479,7 @@ export default function SettingsPage() {
 						</div>
 						<button
 							onClick={comingSoon("Saving account details")}
-							className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover"
+							className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover"
 						>
 							Save Changes
 						</button>

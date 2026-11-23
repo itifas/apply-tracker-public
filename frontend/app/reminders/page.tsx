@@ -47,7 +47,7 @@ const shellPanelClass = "rounded-2xl border border-border bg-card shadow-sm";
 const fieldClass =
 	"w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 const primaryButtonClass =
-	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover";
+	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover";
 
 const reminderThemeMap = {
 	red: {
@@ -551,6 +551,11 @@ export default function RemindersPage() {
 													toggleReminder(reminder.id, reminder.completed)
 												}
 												className="rounded-lg p-2 text-textSoft transition-colors hover:bg-surfaceAlt hover:text-textMain"
+												aria-label={
+													reminder.completed
+														? `Mark follow-up for ${reminder.company} as not done`
+														: `Mark follow-up for ${reminder.company} as done`
+												}
 											>
 												<Bell size={18} />
 											</button>
@@ -623,6 +628,7 @@ export default function RemindersPage() {
 										<label className="relative inline-flex cursor-pointer items-center">
 											<input
 												type="checkbox"
+												aria-label={rule.title}
 												className="peer sr-only"
 												defaultChecked={rule.on}
 												onChange={
@@ -650,7 +656,7 @@ export default function RemindersPage() {
 									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
 								>
 									<div className="flex items-center gap-3">
-										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-semibold text-white">
+										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-semibold text-onPrimary">
 											G
 										</div>
 										<div className="text-left">
@@ -668,7 +674,7 @@ export default function RemindersPage() {
 									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
 								>
 									<div className="flex items-center gap-3">
-										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary font-semibold text-white">
+										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary font-semibold text-onPrimary">
 											O
 										</div>
 										<div className="text-left">

@@ -43,7 +43,7 @@ export default function LoginPage() {
 			<div className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-surface shadow-panel">
 				<div className="border-b border-border bg-[linear-gradient(180deg,rgba(79,70,229,0.06),transparent)] px-8 py-6">
 					<div className="flex items-center gap-3">
-						<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
+						<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-onPrimary shadow-glow">
 							<BriefcaseBusiness size={22} />
 						</div>
 						<div>
@@ -119,7 +119,7 @@ export default function LoginPage() {
 					<button
 						type="submit"
 						disabled={isSubmitting}
-						className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-primaryHover disabled:cursor-not-allowed disabled:opacity-70"
+						className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-onPrimary transition hover:bg-primaryHover disabled:cursor-not-allowed disabled:opacity-70"
 					>
 						{isSubmitting ? (
 							<Loader2 size={16} className="animate-spin" />

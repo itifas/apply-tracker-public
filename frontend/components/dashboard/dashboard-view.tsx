@@ -37,7 +37,7 @@ const REMINDER_LABELS: Record<string, string> = {
 };
 
 const primaryButton =
-	"inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-bold text-white transition-[background-color,transform] duration-150 ease-out hover:bg-primaryHover active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+	"inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-bold text-onPrimary transition-[background-color,transform] duration-150 ease-out hover:bg-primaryHover active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 const textLink =
 	"shrink-0 rounded-sm text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface";
@@ -154,7 +154,7 @@ export function DashboardView() {
 								<p className="text-sm text-textSoft">
 									{format(today, "EEEE, d MMMM")}
 								</p>
-								<h1 className="mt-2 max-w-[22ch] text-balance text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-textMain sm:text-[42px]">
+								<h1 className="mt-2 max-w-[22ch] text-balance text-[28px] font-extrabold leading-[1.15] tracking-[-0.02em] text-textMain sm:text-[34px] lg:text-[42px]">
 									{headline(data.metrics.interviewing, dueCount)}
 								</h1>
 							</div>

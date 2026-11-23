@@ -32,7 +32,7 @@ const panelClass = "rounded-2xl border border-border bg-card shadow-sm";
 const neutralButtonClass =
 	"inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2 text-sm font-medium text-textMain transition-colors hover:bg-surfaceAlt";
 const primaryButtonClass =
-	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover";
+	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover";
 
 export function ApplicationDetail({ id }: { id: string | null }) {
 	const comingSoon = useComingSoon();

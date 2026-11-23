@@ -4,6 +4,10 @@ All notable changes to Apply Tracker. Versions match the git tags and the deskto
 
 ## Unreleased
 
+- Phones: the sidebar becomes a slide-out menu (menu button in the top bar; Escape, backdrop tap or choosing a page closes it), and the route map stacks each name above its line.
+- Accessibility: every field, dropdown, toggle and icon button has a name; status colours, buttons and links meet WCAG AA contrast in light and dark mode; chart slices are described. Automated checks report no issues on any page.
+- Status labels match the dashboard (Offer, No reply) and use the route-map colours.
+- Favicon, home-screen icon and a link preview image for sharing.
 - Dashboard motion and interaction polish: route lines draw in once per session within ~450ms, toasts slide in and out, press feedback on buttons, hover only on devices that can hover, tabular numerals where numbers line up.
 - Privacy notice and terms describe the planned optional online version: database storage, consent-based anonymised analysis, and user control over their data.
 - Repository organization: Docker Compose file, changelog, issue and pull request templates, automatic checks, code owners.

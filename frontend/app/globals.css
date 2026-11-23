@@ -9,6 +9,7 @@
 	   ease-in-out for things moving on screen. */
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
 	--background: #e9edf0;
 	--surface: #ffffff;
@@ -16,15 +17,15 @@
 	--card: #ffffff;
 	--primary: #1f4fd8;
 	--primary-hover: #1a43b8;
-	--secondary: #138a52;
+	--secondary: #0f7a47;
 	--accent: #f2c230;
-	--highlight: #8e7cc3;
+	--highlight: #6c5aa8;
 	--text-main: #14202b;
 	--text-soft: #5a6875;
 	--border: #d3dae0;
-	--success: #138a52;
-	--warning: #b7791f;
-	--danger: #d23a2f;
+	--success: #0f7a47;
+	--warning: #946200;
+	--danger: #c02f25;
 	--info: #1f4fd8;
 	--muted-surface: #f3f5f7;
 	--canvas-glow-1: transparent;
@@ -34,12 +35,14 @@
 	/* Route map lines, one per application status. */
 	--line-applied: #7a8794;
 	--line-interview: #1f4fd8;
-	--line-offer: #138a52;
-	--line-rejected: #d23a2f;
-	--line-ghosted: #8e7cc3;
+	--line-offer: #0f7a47;
+	--line-rejected: #c02f25;
+	--line-ghosted: #6c5aa8;
 	/* Signal yellow: only for follow-ups that are due. */
 	--signal: #f2c230;
 	--signal-ink: #5c4500;
+	/* Text on primary/success buttons. */
+	--on-primary: #ffffff;
 }
 
 .dark {
@@ -71,6 +74,7 @@
 	--line-ghosted: #ab9ce0;
 	--signal: #f2c230;
 	--signal-ink: #f2c230;
+	--on-primary: #10161c;
 }
 
 :root[data-palette="indigo-aurora"] {
@@ -422,6 +426,46 @@ body {
 		.toast[data-state="entering"],
 		.toast[data-state="leaving"] {
 			transform: none;
+		}
+	}
+
+	/* Phone menu: the sidebar slides in from the edge its button is on.
+	   Opening 300ms on the drawer curve, closing faster at 200ms. */
+	@media (max-width: 1023.98px) {
+		.nav-drawer {
+			transform: translateX(-100%);
+			transition: transform 200ms var(--ease-out);
+		}
+
+		.nav-drawer[data-open="true"] {
+			transform: translateX(0);
+			transition-duration: 300ms;
+			transition-timing-function: var(--ease-drawer);
+		}
+
+		.nav-backdrop {
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 200ms ease;
+		}
+
+		.nav-backdrop[data-open="true"] {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	@media (max-width: 1023.98px) and (prefers-reduced-motion: reduce) {
+		/* Fade instead of slide. */
+		.nav-drawer {
+			transform: none;
+			opacity: 0;
+			transition: opacity 150ms ease;
+		}
+
+		.nav-drawer[data-open="true"] {
+			transform: none;
+			opacity: 1;
 		}
 	}
 

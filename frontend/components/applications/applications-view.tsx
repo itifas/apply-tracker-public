@@ -33,7 +33,7 @@ const controlClass =
 const neutralButtonClass =
 	"inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2 text-sm font-medium text-textMain transition-colors hover:bg-surfaceAlt";
 const primaryButtonClass =
-	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover";
+	"inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover";
 const iconButtonClass =
 	"inline-flex h-9 w-9 items-center justify-center rounded-lg text-textSoft transition-colors hover:bg-surface hover:text-textMain";
 
@@ -363,6 +363,7 @@ export function ApplicationsView() {
 				{label}
 			</span>
 			<select
+				aria-label={`${label} status for ${app.company}`}
 				value={value}
 				onChange={(e) =>
 					inlineUpdate(app.id, key, e.target.value as StepStatus)
@@ -463,6 +464,7 @@ export function ApplicationsView() {
 							<label className="flex items-center gap-2 text-sm text-textSoft">
 								<Filter size={16} />
 								<select
+									aria-label="Filter by status"
 									value={status}
 									onChange={(e) => setStatus(e.target.value)}
 									className={controlClass}
@@ -475,6 +477,7 @@ export function ApplicationsView() {
 								</select>
 							</label>
 							<select
+								aria-label="Sort by"
 								value={sortBy}
 								onChange={(e) => setSortBy(e.target.value)}
 								className={controlClass}
@@ -485,6 +488,7 @@ export function ApplicationsView() {
 								<option value="createdAt">Created</option>
 							</select>
 							<select
+								aria-label="Sort order"
 								value={sortDirection}
 								onChange={(e) =>
 									setSortDirection(e.target.value as "asc" | "desc")
@@ -703,6 +707,7 @@ export function ApplicationsView() {
 											</td>
 											<td className="px-6 py-4">
 												<select
+													aria-label={`Step 1 status for ${app.company}`}
 													value={app.step1Status}
 													onChange={(e) =>
 														inlineUpdate(
@@ -722,6 +727,7 @@ export function ApplicationsView() {
 											</td>
 											<td className="px-6 py-4">
 												<select
+													aria-label={`Step 2 status for ${app.company}`}
 													value={app.step2Status}
 													onChange={(e) =>
 														inlineUpdate(
@@ -741,6 +747,7 @@ export function ApplicationsView() {
 											</td>
 											<td className="px-6 py-4">
 												<select
+													aria-label={`Step 3 status for ${app.company}`}
 													value={app.step3Status}
 													onChange={(e) =>
 														inlineUpdate(

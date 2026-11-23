@@ -73,7 +73,7 @@ export default function EmailIntegrationPage() {
 					<h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
 						Email Integration
 					</h1>
-					<p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+					<p className="text-sm text-textSoft mt-1">
 						Automatically sync and detect application-related emails
 					</p>
 				</div>
@@ -86,7 +86,7 @@ export default function EmailIntegrationPage() {
 							<div className="flex items-center gap-3">
 								<div className="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center">
 									<Mail
-										className="text-green-600 dark:text-green-400"
+										className="text-success"
 										size={24}
 									/>
 								</div>
@@ -94,19 +94,19 @@ export default function EmailIntegrationPage() {
 									<p className="font-semibold text-gray-900 dark:text-gray-100">
 										Gmail
 									</p>
-									<p className="text-sm text-green-600 flex items-center gap-1 mt-1">
+									<p className="text-sm text-success flex items-center gap-1 mt-1">
 										<CheckCircle size={14} />
 										{data?.connected ? "Connected" : "Connected"}
 									</p>
 								</div>
 							</div>
-							<button onClick={comingSoon("Disconnecting Gmail")} className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
+							<button onClick={comingSoon("Disconnecting Gmail")} className="text-sm text-textSoft hover:text-gray-900 dark:hover:text-gray-200">
 								Disconnect
 							</button>
 						</div>
 						<div className="space-y-2 text-sm">
 							<div className="flex items-center justify-between">
-								<span className="text-gray-600 dark:text-gray-400">
+								<span className="text-textSoft">
 									Account
 								</span>
 								<span className="font-medium text-gray-900 dark:text-gray-100">
@@ -114,7 +114,7 @@ export default function EmailIntegrationPage() {
 								</span>
 							</div>
 							<div className="flex items-center justify-between">
-								<span className="text-gray-600 dark:text-gray-400">
+								<span className="text-textSoft">
 									Last synced
 								</span>
 								<span className="font-medium text-gray-900 dark:text-gray-100">
@@ -122,7 +122,7 @@ export default function EmailIntegrationPage() {
 								</span>
 							</div>
 							<div className="flex items-center justify-between">
-								<span className="text-gray-600 dark:text-gray-400">
+								<span className="text-textSoft">
 									Emails detected
 								</span>
 								<span className="font-medium text-gray-900 dark:text-gray-100">
@@ -130,7 +130,7 @@ export default function EmailIntegrationPage() {
 								</span>
 							</div>
 						</div>
-						<button onClick={comingSoon("Email sync")} className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+						<button onClick={comingSoon("Email sync")} className="w-full mt-4 px-4 py-2 bg-success text-onPrimary rounded-lg hover:opacity-90 transition-colors text-sm font-medium">
 							Sync Now
 						</button>
 					</div>
@@ -149,14 +149,14 @@ export default function EmailIntegrationPage() {
 									<p className="font-semibold text-gray-900 dark:text-gray-100">
 										Outlook
 									</p>
-									<p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-1">
+									<p className="text-sm text-textSoft flex items-center gap-1 mt-1">
 										<AlertCircle size={14} />
 										Not connected
 									</p>
 								</div>
 							</div>
 						</div>
-						<p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+						<p className="text-sm text-textSoft mb-4">
 							Connect your Outlook account to sync application-related
 							emails automatically.
 						</p>
@@ -183,7 +183,7 @@ export default function EmailIntegrationPage() {
 							<p className="font-medium text-gray-900 dark:text-gray-100 text-sm mb-1">
 								Interview Invitations
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400">
+							<p className="text-xs text-textSoft">
 								Automatically detect scheduling emails
 							</p>
 						</div>
@@ -195,7 +195,7 @@ export default function EmailIntegrationPage() {
 							<p className="font-medium text-gray-900 dark:text-gray-100 text-sm mb-1">
 								Rejections
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400">
+							<p className="text-xs text-textSoft">
 								Identify and update status
 							</p>
 						</div>
@@ -207,7 +207,7 @@ export default function EmailIntegrationPage() {
 							<p className="font-medium text-gray-900 dark:text-gray-100 text-sm mb-1">
 								Offer Letters
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400">
+							<p className="text-xs text-textSoft">
 								Recognize offer communications
 							</p>
 						</div>
@@ -259,7 +259,7 @@ export default function EmailIntegrationPage() {
 												{email.confidence} confidence
 											</span>
 										</div>
-										<p className="text-sm text-gray-600 dark:text-gray-400">
+										<p className="text-sm text-textSoft">
 											{email.subject}
 										</p>
 										<div className="flex items-center gap-2 mt-1">
@@ -267,11 +267,11 @@ export default function EmailIntegrationPage() {
 												size={12}
 												className="text-gray-400"
 											/>
-											<p className="text-xs text-gray-500 dark:text-gray-400">
+											<p className="text-xs text-textSoft">
 												{email.date}
 											</p>
 											{email.matched && (
-												<span className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+												<span className="text-xs text-success flex items-center gap-1">
 													<CheckCircle size={12} />
 													Auto-matched
 												</span>
@@ -280,7 +280,7 @@ export default function EmailIntegrationPage() {
 									</div>
 								</div>
 								<div className="flex items-center gap-2">
-									<button onClick={comingSoon("Viewing emails")} className="px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 rounded-lg transition-colors">
+									<button onClick={comingSoon("Viewing emails")} className="px-3 py-1.5 text-sm text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30 rounded-lg transition-colors">
 										View
 									</button>
 									<button onClick={comingSoon("Updating status from email")} className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-900 dark:text-gray-100">
@@ -334,13 +334,14 @@ export default function EmailIntegrationPage() {
 										<p className="font-medium text-gray-900 dark:text-gray-100 text-sm">
 											{s.title}
 										</p>
-										<p className="text-xs text-gray-500 dark:text-gray-400">
+										<p className="text-xs text-textSoft">
 											{s.desc}
 										</p>
 									</div>
 									<label className="relative inline-flex items-center cursor-pointer">
 										<input
 											type="checkbox"
+											aria-label={s.title}
 											className="sr-only peer"
 											defaultChecked={s.on}
 										/>
@@ -354,11 +355,11 @@ export default function EmailIntegrationPage() {
 									<p className="font-medium text-gray-900 dark:text-gray-100 text-sm">
 										Sync frequency
 									</p>
-									<p className="text-xs text-gray-500 dark:text-gray-400">
+									<p className="text-xs text-textSoft">
 										How often to check for new emails
 									</p>
 								</div>
-								<select className="px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+								<select aria-label="Sync frequency" className="px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
 									<option>Every hour</option>
 									<option>Every 3 hours</option>
 									<option>Every 6 hours</option>

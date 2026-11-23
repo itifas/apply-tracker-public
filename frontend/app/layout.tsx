@@ -6,8 +6,18 @@ import { ToastProvider } from "@/components/feedback/toast";
 import { DemoFetchInstaller } from "@/components/demo/demo-mode";
 
 export const metadata: Metadata = {
+	metadataBase: new URL(
+		process.env.NEXT_PUBLIC_SITE_URL ?? "https://tracker.iakovostifas.com",
+	),
 	title: "Apply Tracker",
 	description: "Track job applications, interview stages and follow-ups.",
+	openGraph: {
+		title: "Apply Tracker",
+		description: "See where every job application stands.",
+		siteName: "Apply Tracker",
+		type: "website",
+	},
+	twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

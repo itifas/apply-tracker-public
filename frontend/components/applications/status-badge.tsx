@@ -2,14 +2,20 @@ import { FinalStatus, StepStatus } from "@prisma/client";
 
 const colorMap: Record<string, string> = {
 	// Final Status colors
-	Applied: "bg-surfaceAlt text-info border-border",
-	Interviewing: "bg-surfaceAlt text-secondary border-border",
-	Rejected: "bg-surfaceAlt text-danger border-border",
-	OFFER: "bg-surfaceAlt text-accent border-border",
-	Ghosted: "bg-surfaceAlt text-highlight border-border",
+	Applied: "bg-surfaceAlt text-textSoft border-border",
+	Interviewing: "bg-surfaceAlt text-[var(--line-interview)] border-border",
+	Rejected: "bg-surfaceAlt text-[var(--line-rejected)] border-border",
+	OFFER: "bg-surfaceAlt text-[var(--line-offer)] border-border",
+	Ghosted: "bg-surfaceAlt text-[var(--line-ghosted)] border-border",
 	// Step Status colors
 	Pending: "bg-surfaceAlt text-textSoft border-border",
 	Passed: "bg-surfaceAlt text-success border-border",
+};
+
+// Plain-language names, matching the dashboard.
+const labelMap: Record<string, string> = {
+	OFFER: "Offer",
+	Ghosted: "No reply",
 };
 
 export function StatusBadge({
@@ -28,7 +34,7 @@ export function StatusBadge({
 		<span
 			className={`inline-flex items-center rounded-full border font-medium ${sizeClasses} ${colorClass}`}
 		>
-			{status}
+			{labelMap[status] ?? status}
 		</span>
 	);
 }

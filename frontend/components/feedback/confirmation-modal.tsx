@@ -52,7 +52,7 @@ export function ConfirmationModal({
 					<button
 						type="button"
 						onClick={onConfirm}
-						className="inline-flex items-center justify-center gap-2 rounded-xl bg-danger px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-70"
+						className="inline-flex items-center justify-center gap-2 rounded-xl bg-danger px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:opacity-90 disabled:opacity-70"
 						disabled={isLoading}
 					>
 						{isLoading && <Loader2 size={16} className="animate-spin" />}

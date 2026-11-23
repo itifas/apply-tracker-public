@@ -144,7 +144,7 @@ export default function AnalyticsPage() {
 							<p>{error}</p>
 							<button
 								onClick={() => setRetryKey((prev) => prev + 1)}
-								className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primaryHover transition-colors text-sm font-medium shadow-glow"
+								className="px-4 py-2 bg-primary text-onPrimary rounded-lg hover:bg-primaryHover transition-colors text-sm font-medium shadow-glow"
 							>
 								Retry
 							</button>
@@ -269,7 +269,11 @@ export default function AnalyticsPage() {
 											dataKey="value"
 										>
 											{statusData.map((entry, index) => (
-												<Cell key={`cell-${index}`} fill={entry.color} />
+												<Cell
+													key={`cell-${index}`}
+													fill={entry.color}
+													aria-label={`${entry.name}: ${entry.value}`}
+												/>
 											))}
 										</Pie>
 										<Tooltip
@@ -290,13 +294,13 @@ export default function AnalyticsPage() {
 											label: "Applied",
 											count: totalApps,
 											pct: 100,
-											color: "bg-primary",
+											color: "bg-textSoft",
 										},
 										{
 											label: "Responded",
 											count: responded,
 											pct: responseRate,
-											color: "bg-secondary",
+											color: "bg-highlight",
 										},
 										{
 											label: "Interviewing",
@@ -305,7 +309,7 @@ export default function AnalyticsPage() {
 												totalApps > 0
 													? Math.round((interviewing / totalApps) * 100)
 													: 0,
-											color: "bg-highlight",
+											color: "bg-primary",
 										},
 										{
 											label: "Offers",
@@ -314,7 +318,7 @@ export default function AnalyticsPage() {
 												totalApps > 0
 													? Math.round((offers / totalApps) * 100)
 													: 0,
-											color: "bg-accent",
+											color: "bg-secondary",
 										},
 									].map((stage) => (
 										<div key={stage.label}>
@@ -331,7 +335,7 @@ export default function AnalyticsPage() {
 													className={`${stage.color} h-8 rounded-full flex items-center justify-end pr-3`}
 													style={{ width: `${Math.max(stage.pct, 5)}%` }}
 												>
-													<span className="text-xs text-white font-medium">
+													<span className="text-xs font-semibold text-surface">
 														{stage.pct}%
 													</span>
 												</div>

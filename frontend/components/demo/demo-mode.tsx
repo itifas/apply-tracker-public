@@ -68,7 +68,9 @@ export function DemoBanner() {
 	}
 
 	return (
-		<div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-border bg-surface px-4 py-2 text-center text-[13px] text-textSoft">
+		<aside
+			aria-label="Demo notice"
+			className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-border bg-surface px-4 py-2 text-center text-[13px] text-textSoft">
 			<span>
 				This is a demo. Your changes are saved only in this browser.
 			</span>
@@ -80,6 +82,6 @@ export function DemoBanner() {
 				<RotateCcw size={12} />
 				Reset sample data
 			</button>
-		</div>
+		</aside>
 	);
 }

@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useComingSoon } from "@/components/feedback/in-progress";
-import { Bell, Search, Sun, Moon } from "lucide-react";
+import { Bell, Menu, Search, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 type CurrentUser = {
@@ -12,7 +12,13 @@ type CurrentUser = {
 	fullName: string | null;
 };
 
-export function Topbar() {
+export function Topbar({
+	menuOpen = false,
+	onOpenMenu,
+}: {
+	menuOpen?: boolean;
+	onOpenMenu?: () => void;
+}) {
 	const { resolvedTheme, setTheme } = useTheme();
 	const [user, setUser] = useState<CurrentUser | null>(null);
 	const [mounted, setMounted] = useState(false);
@@ -41,9 +47,19 @@ export function Topbar() {
 	const displayDetail = user?.email || user?.username || "Signed in";
 
 	return (
-		<header className="sticky top-0 z-10 border-b border-border bg-background/90 px-8 py-3 backdrop-blur">
-			<div className="flex items-center justify-between">
-				<div className="flex-1 max-w-xl">
+		<header className="sticky top-0 z-30 border-b border-border bg-background/90 px-4 py-3 backdrop-blur sm:px-8">
+			<div className="flex items-center justify-between gap-2">
+				<button
+					type="button"
+					onClick={onOpenMenu}
+					aria-label="Open menu"
+					aria-expanded={menuOpen}
+					aria-controls="app-sidebar"
+					className="-ml-1 rounded-md p-2 text-textMain transition-[background-color,transform] duration-150 ease-out hover:bg-surface active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:hidden"
+				>
+					<Menu size={20} />
+				</button>
+				<div className="min-w-0 max-w-xl flex-1">
 					<form className="relative" role="search" onSubmit={handleSearch}>
 						<Search
 							className="absolute left-3 top-1/2 -translate-y-1/2 text-textSoft"
@@ -60,7 +76,7 @@ export function Topbar() {
 					</form>
 				</div>
 
-				<div className="ml-4 flex items-center gap-2">
+				<div className="flex items-center gap-1 sm:ml-4 sm:gap-2">
 					<button
 						onClick={() =>
 							setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -71,6 +87,7 @@ export function Topbar() {
 								? `Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`
 								: "Toggle theme"
 						}
+						aria-label="Toggle dark mode"
 					>
 						{mounted ? (
 							resolvedTheme === "dark" ? (
@@ -86,13 +103,14 @@ export function Topbar() {
 					<button
 						onClick={comingSoon("Notifications")}
 						title="Notifications (coming soon)"
+						aria-label="Notifications (coming soon)"
 						className="rounded-md p-2 text-textSoft transition-[background-color,color,transform] duration-150 ease-out hover:bg-surface hover:text-textMain active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative"
 					>
 						<Bell size={18} />
 					</button>
 
-					<div className="ml-2 flex items-center gap-3 border-l border-border pl-4">
-						<div className="text-right">
+					<div className="ml-1 flex items-center gap-3 border-l border-border pl-3 sm:ml-2 sm:pl-4">
+						<div className="hidden text-right sm:block">
 							<p className="text-sm font-medium text-textMain">{displayName}</p>
 							<p className="text-xs text-textSoft">{displayDetail}</p>
 						</div>

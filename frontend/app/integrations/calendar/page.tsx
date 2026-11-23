@@ -30,13 +30,13 @@ export default function CalendarIntegrationPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">Calendar Integration</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Sync your reminders with external calendars</p>
+          <p className="text-sm text-textSoft mt-1">Sync your reminders with external calendars</p>
         </div>
 
         <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Provider Status</h2>
           <pre className="overflow-auto rounded-lg bg-gray-50 dark:bg-gray-800 p-4 text-xs text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">{JSON.stringify(data, null, 2)}</pre>
-          <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-3 text-sm text-textSoft">
             .ics export is fully functional. Google/Outlook are scaffold stubs for future OAuth integration.
           </p>
         </div>

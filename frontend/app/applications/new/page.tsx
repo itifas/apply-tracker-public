@@ -91,17 +91,23 @@ export default function NewApplicationPage() {
 							placeholder="Application link"
 							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
 						/>
-						<input
-							name="dateApplied"
-							type="date"
-							required
-							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-						/>
-						<input
-							name="nextFollowUp"
-							type="date"
-							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-						/>
+						<label className="grid gap-1 text-sm text-textSoft">
+							Date applied
+													<input
+														name="dateApplied"
+														type="date"
+														required
+														className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+													/>
+						</label>
+						<label className="grid gap-1 text-sm text-textSoft">
+							Next follow-up (optional)
+													<input
+														name="nextFollowUp"
+														type="date"
+														className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+													/>
+						</label>
 						<input
 							name="contactPerson"
 							placeholder="Contact person"
@@ -123,6 +129,7 @@ export default function NewApplicationPage() {
 							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
 						/>
 						<select
+							aria-label="Step 1 status"
 							name="step1Status"
 							defaultValue={StepStatus.Pending}
 							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -134,6 +141,7 @@ export default function NewApplicationPage() {
 							))}
 						</select>
 						<select
+							aria-label="Step 2 status"
 							name="step2Status"
 							defaultValue={StepStatus.Pending}
 							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -145,6 +153,7 @@ export default function NewApplicationPage() {
 							))}
 						</select>
 						<select
+							aria-label="Step 3 status"
 							name="step3Status"
 							defaultValue={StepStatus.Pending}
 							className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-textMain outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -167,7 +176,7 @@ export default function NewApplicationPage() {
 							<button
 								type="submit"
 								disabled={isSubmitting}
-								className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover disabled:opacity-70 md:w-auto"
+								className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover disabled:opacity-70 md:w-auto"
 							>
 								{isSubmitting && <Loader2 size={16} className="animate-spin" />}
 								Create Application

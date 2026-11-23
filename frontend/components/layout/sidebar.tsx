@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 
 const navItems = [
 	{ href: "/dashboard", label: "Dashboard" },
@@ -13,11 +14,78 @@ const navItems = [
 	{ href: "/settings", label: "Settings" },
 ];
 
+// True on screens where the sidebar is a slide-out drawer (below lg).
+function useIsDrawer() {
+	const [isDrawer, setIsDrawer] = useState(false);
+
+	useEffect(() => {
+		const query = window.matchMedia("(max-width: 1023.98px)");
+		const update = () => setIsDrawer(query.matches);
+		update();
+		query.addEventListener("change", update);
+		return () => query.removeEventListener("change", update);
+	}, []);
+
+	return isDrawer;
+}
+
 // The navigation is drawn as a line with stations; the current page is the
-// station you're at.
-export function Sidebar() {
+// station you're at. Below lg it becomes a drawer opened from the top bar.
+export function Sidebar({
+	open = false,
+	onClose,
+}: {
+	open?: boolean;
+	onClose?: () => void;
+}) {
 	const pathname = usePathname();
 	const router = useRouter();
+	const isDrawer = useIsDrawer();
+	const panelRef = useRef<HTMLElement>(null);
+	const hidden = isDrawer && !open;
+
+	// A closed drawer can't be tabbed into or read out.
+	useEffect(() => {
+		if (panelRef.current) {
+			panelRef.current.inert = hidden;
+		}
+	}, [hidden]);
+
+	// Close when the page changes.
+	useEffect(() => {
+		onClose?.();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pathname]);
+
+	// While open as a drawer: Escape closes, focus moves in and returns to the
+	// menu button afterwards, and the page behind doesn't scroll.
+	useEffect(() => {
+		if (!isDrawer || !open) {
+			return;
+		}
+
+		const opener = document.activeElement as HTMLElement | null;
+		const panel = panelRef.current;
+		(
+			panel?.querySelector<HTMLElement>("a[aria-current]") ??
+			panel?.querySelector<HTMLElement>("nav a")
+		)?.focus();
+		const { overflow } = document.body.style;
+		document.body.style.overflow = "hidden";
+
+		function onKeyDown(event: KeyboardEvent) {
+			if (event.key === "Escape") {
+				onClose?.();
+			}
+		}
+		document.addEventListener("keydown", onKeyDown);
+
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+			document.body.style.overflow = overflow;
+			opener?.focus();
+		};
+	}, [isDrawer, open, onClose]);
 
 	async function handleLogout() {
 		await fetch("/api/auth/logout", { method: "POST" });
@@ -26,16 +94,41 @@ export function Sidebar() {
 	}
 
 	return (
-		<aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col border-r border-border bg-surface">
-			<Link
-				href="/dashboard"
-				className="flex items-center gap-3 px-6 pb-8 pt-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+		<>
+			<div
+				aria-hidden="true"
+				data-open={open}
+				onClick={onClose}
+				className="nav-backdrop fixed inset-0 z-40 bg-[#0b1118]/50 lg:hidden"
+			/>
+			<aside
+				id="app-sidebar"
+				ref={panelRef}
+				data-open={open}
+				aria-label="Navigation"
+				aria-hidden={hidden || undefined}
+				{...(isDrawer && open ? { role: "dialog", "aria-modal": true } : {})}
+				className="nav-drawer fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-72 max-w-[85vw] shrink-0 flex-col border-r border-border bg-surface lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:w-60"
 			>
-				<RouteMark />
-				<span className="text-[19px] font-extrabold leading-none tracking-[-0.01em] text-textMain">
-					Apply Tracker
-				</span>
-			</Link>
+			<div className="flex items-center justify-between gap-3 pb-8 pr-3 pt-7">
+				<Link
+					href="/dashboard"
+					className="flex items-center gap-3 pl-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+				>
+					<RouteMark />
+					<span className="text-[19px] font-extrabold leading-none tracking-[-0.01em] text-textMain">
+						Apply Tracker
+					</span>
+				</Link>
+				<button
+					type="button"
+					onClick={onClose}
+					aria-label="Close menu"
+					className="rounded-md p-2 text-textSoft transition-[background-color,color,transform] duration-150 ease-out hover:bg-surfaceAlt hover:text-textMain active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:hidden"
+				>
+					<X size={18} />
+				</button>
+			</div>
 
 			<nav aria-label="Main" className="relative flex-1 px-6">
 				<span
@@ -81,7 +174,8 @@ export function Sidebar() {
 					Sign out
 				</button>
 			</div>
-		</aside>
+			</aside>
+		</>
 	);
 }
 

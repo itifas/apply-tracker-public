@@ -20,6 +20,7 @@ const config: Config = {
 				surfaceAlt: "var(--surface-alt)",
 				card: "var(--card)",
 				primary: "var(--primary)",
+				onPrimary: "var(--on-primary)",
 				primaryHover: "var(--primary-hover)",
 				secondary: "var(--secondary)",
 				accent: "var(--accent)",
