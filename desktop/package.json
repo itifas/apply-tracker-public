@@ -1,0 +1,83 @@
+{
+	"name": "apply-tracker-desktop",
+	"productName": "Apply Tracker",
+	"version": "0.1.0",
+	"description": "Apply Tracker for Windows",
+	"author": "Iakovos Tifas",
+	"license": "MIT",
+	"private": true,
+	"main": "main.js",
+	"scripts": {
+		"build:web": "node build-web.js",
+		"start": "electron .",
+		"dist": "electron-builder --publish never"
+	},
+	"build": {
+		"appId": "com.iakovostifas.applytracker",
+		"productName": "Apply Tracker",
+		"files": [
+			"main.js",
+			"app/**/*"
+		],
+		"win": {
+			"target": "nsis",
+			"artifactName": "Apply-Tracker-Setup-${version}.${ext}"
+		},
+		"nsis": {
+			"oneClick": false,
+			"allowToChangeInstallationDirectory": true,
+			"createDesktopShortcut": true,
+			"license": "../LICENSE"
+		},
+		"publish": {
+			"provider": "github",
+			"owner": "itifas",
+			"repo": "apply-tracker-public",
+			"releaseType": "release"
+		},
+		"extraFiles": [
+			{
+				"from": "../LICENSE",
+				"to": "LICENSE.txt"
+			}
+		],
+		"copyright": "Copyright \u00a9 2026 Iakovos Tifas. MIT License.",
+		"mac": {
+			"category": "public.app-category.productivity",
+			"target": [
+				{
+					"target": "dmg",
+					"arch": [
+						"x64",
+						"arm64"
+					]
+				},
+				{
+					"target": "zip",
+					"arch": [
+						"x64",
+						"arm64"
+					]
+				}
+			],
+			"artifactName": "Apply-Tracker-${version}-mac-${arch}.${ext}"
+		},
+		"linux": {
+			"target": [
+				"AppImage"
+			],
+			"category": "Office",
+			"artifactName": "Apply-Tracker-${version}-linux-${arch}.${ext}",
+			"syncDesktopName": true
+		}
+	},
+	"dependencies": {
+		"electron-updater": "6.8.11"
+	},
+	"devDependencies": {
+		"electron": "45.4.1",
+		"electron-builder": "26.18.0"
+	},
+	"homepage": "https://github.com/itifas/apply-tracker-public",
+	"desktopName": "apply-tracker.desktop"
+}
