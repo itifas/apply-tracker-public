@@ -82,22 +82,35 @@ function ToastCard({
 }) {
 	const style = toastStyles[toast.type];
 	const Icon = style.icon;
+	const [state, setState] = useState<"entering" | "shown" | "leaving">(
+		"entering",
+	);
+
+	// Start from the off-screen state, then let the CSS transition run.
+	useEffect(() => {
+		const frame = requestAnimationFrame(() => setState("shown"));
+		return () => cancelAnimationFrame(frame);
+	}, []);
+
+	const dismiss = useCallback(() => {
+		setState("leaving");
+		window.setTimeout(() => onDismiss(toast.id), 200);
+	}, [onDismiss, toast.id]);
 
 	useEffect(() => {
 		if (toast.duration <= 0) {
 			return;
 		}
 
-		const timer = window.setTimeout(() => {
-			onDismiss(toast.id);
-		}, toast.duration);
+		const timer = window.setTimeout(dismiss, toast.duration);
 
 		return () => window.clearTimeout(timer);
-	}, [onDismiss, toast.duration, toast.id]);
+	}, [dismiss, toast.duration]);
 
 	return (
 		<div
-			className={`pointer-events-auto flex gap-3 rounded-xl border border-l-4 border-border ${style.borderClass} bg-card p-4 text-textMain shadow-panel`}
+			data-state={state}
+			className={`toast pointer-events-auto flex gap-3 rounded-lg border border-l-4 border-border ${style.borderClass} bg-card p-4 text-textMain shadow-panel`}
 			role={toast.type === "error" ? "alert" : "status"}
 		>
 			<Icon className={`mt-0.5 shrink-0 ${style.iconClass}`} size={18} />
@@ -111,8 +124,8 @@ function ToastCard({
 			</div>
 			<button
 				type="button"
-				onClick={() => onDismiss(toast.id)}
-				className="shrink-0 rounded-lg p-1 text-textSoft transition-colors hover:bg-surfaceAlt hover:text-textMain"
+				onClick={dismiss}
+				className="shrink-0 rounded-md p-1 text-textSoft transition-[background-color,color,transform] duration-150 ease-out hover:bg-surfaceAlt hover:text-textMain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.92]"
 				aria-label="Close notification"
 			>
 				<X size={16} />

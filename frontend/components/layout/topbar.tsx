@@ -65,7 +65,7 @@ export function Topbar() {
 						onClick={() =>
 							setTheme(resolvedTheme === "dark" ? "light" : "dark")
 						}
-						className="rounded-md p-2 text-textSoft transition-colors hover:bg-surface hover:text-textMain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+						className="rounded-md p-2 text-textSoft transition-[background-color,color,transform] duration-150 ease-out hover:bg-surface hover:text-textMain active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
 						title={
 							mounted
 								? `Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`
@@ -86,7 +86,7 @@ export function Topbar() {
 					<button
 						onClick={comingSoon("Notifications")}
 						title="Notifications (coming soon)"
-						className="rounded-md p-2 text-textSoft transition-colors hover:bg-surface hover:text-textMain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative"
+						className="rounded-md p-2 text-textSoft transition-[background-color,color,transform] duration-150 ease-out hover:bg-surface hover:text-textMain active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative"
 					>
 						<Bell size={18} />
 					</button>

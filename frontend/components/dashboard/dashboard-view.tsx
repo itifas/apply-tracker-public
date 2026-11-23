@@ -37,7 +37,10 @@ const REMINDER_LABELS: Record<string, string> = {
 };
 
 const primaryButton =
-	"inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-primaryHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+	"inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-bold text-white transition-[background-color,transform] duration-150 ease-out hover:bg-primaryHover active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const textLink =
+	"shrink-0 rounded-sm text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface";
 
 function plural(count: number, one: string, many: string) {
 	return `${count} ${count === 1 ? one : many}`;
@@ -151,7 +154,7 @@ export function DashboardView() {
 								<p className="text-sm text-textSoft">
 									{format(today, "EEEE, d MMMM")}
 								</p>
-								<h1 className="mt-2 max-w-[22ch] text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-textMain sm:text-[42px]">
+								<h1 className="mt-2 max-w-[22ch] text-balance text-[34px] font-extrabold leading-[1.12] tracking-[-0.02em] text-textMain sm:text-[42px]">
 									{headline(data.metrics.interviewing, dueCount)}
 								</h1>
 							</div>
@@ -174,7 +177,7 @@ export function DashboardView() {
 								</h2>
 								<Link
 									href="/applications"
-									className="shrink-0 text-sm font-semibold text-primary hover:underline"
+									className={textLink}
 								>
 									{applications.length > 8
 										? `See all ${applications.length}`
@@ -198,7 +201,7 @@ export function DashboardView() {
 									</h2>
 									<Link
 										href="/reminders"
-										className="text-sm font-semibold text-primary hover:underline"
+										className={textLink}
 									>
 										Manage
 									</Link>
@@ -226,7 +229,7 @@ export function DashboardView() {
 															className="absolute -left-5 bottom-2 top-2 w-[4px] rounded-full bg-[var(--signal)] sm:-left-8"
 														/>
 													)}
-													<span className="text-center leading-none">
+													<span className="text-center leading-none tabular-nums">
 														<span className="block text-[22px] font-extrabold text-textMain">
 															{format(date, "d")}
 														</span>
@@ -245,7 +248,7 @@ export function DashboardView() {
 														</span>
 													</span>
 													<span
-														className={`text-right text-sm ${
+														className={`text-right text-sm tabular-nums ${
 															due
 																? "font-bold text-[var(--signal-ink)]"
 																: "text-textSoft"
@@ -285,14 +288,14 @@ export function DashboardView() {
 										["No reply", data.metrics.ghosted, "var(--line-ghosted)"],
 										["Offer rate", `${data.metrics.successRate}%`, "var(--text-main)"],
 									].map(([label, value, color]) => (
-										<div key={label as string}>
+										<div key={label as string} className="flex flex-col-reverse">
+											<dt className="mt-1.5 text-sm text-textSoft">{label}</dt>
 											<dd
-												className="text-[30px] font-extrabold leading-none"
+												className="text-[30px] font-extrabold leading-none tabular-nums"
 												style={{ color: color as string }}
 											>
 												{value}
 											</dd>
-											<dt className="mt-1.5 text-sm text-textSoft">{label}</dt>
 										</div>
 									))}
 								</dl>

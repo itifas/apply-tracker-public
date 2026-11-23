@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import type { ApplicationRecord } from "@/types/application";
 import { applicationHref } from "@/lib/demo/config";
 
@@ -87,6 +88,36 @@ export function sortForRouteMap(apps: ApplicationRecord[]) {
 
 const pct = (station: number) => `${(station / LAST) * 100}%`;
 
+// Short, uneven stagger: rows settle quickly and the whole map is drawn
+// within ~450ms, so it reads as one motion rather than a queue.
+const ROW_DELAYS = [0, 40, 75, 105, 130, 150, 165, 175];
+const rowDelay = (row: number) =>
+	`${ROW_DELAYS[Math.min(row, ROW_DELAYS.length - 1)]}ms`;
+
+const DRAWN_KEY = "apply-tracker.route-map-drawn";
+
+// The draw-in explains the map the first time it's seen. After that, the
+// lines render in place: people open this page many times a day.
+function useDrawOnce() {
+	const [animate] = useState(() => {
+		try {
+			return window.sessionStorage.getItem(DRAWN_KEY) !== "1";
+		} catch {
+			return false;
+		}
+	});
+
+	useEffect(() => {
+		try {
+			window.sessionStorage.setItem(DRAWN_KEY, "1");
+		} catch {
+			// Storage unavailable: lines simply won't animate next time either.
+		}
+	}, []);
+
+	return animate;
+}
+
 function Track({ route, row }: { route: Route; row: number }) {
 	const { reached, end, color } = route;
 
@@ -103,7 +134,7 @@ function Track({ route, row }: { route: Route; row: number }) {
 						left: 0,
 						width: pct(1),
 						borderColor: color,
-						["--row" as string]: row,
+						["--delay" as string]: rowDelay(row),
 					}}
 				/>
 			) : reached > 0 ? (
@@ -113,7 +144,7 @@ function Track({ route, row }: { route: Route; row: number }) {
 						left: 0,
 						width: pct(reached),
 						background: color,
-						["--row" as string]: row,
+						["--delay" as string]: rowDelay(row),
 					}}
 				/>
 			) : null}
@@ -192,9 +223,10 @@ export function RouteMap({
 	limit?: number;
 }) {
 	const rows = sortForRouteMap(applications).slice(0, limit);
+	const animate = useDrawOnce();
 
 	return (
-		<div>
+		<div className={animate ? undefined : "route-static"}>
 			<div
 				className="hidden grid-cols-[minmax(170px,230px)_1fr_150px] gap-6 pb-3 text-[13px] text-textSoft md:grid"
 				aria-hidden="true"
@@ -230,7 +262,7 @@ export function RouteMap({
 						<li key={app.id}>
 							<Link
 								href={applicationHref(app.id)}
-								className="grid grid-cols-1 items-center gap-x-6 gap-y-2 rounded-md px-1 py-3.5 outline-none transition-colors hover:bg-surfaceAlt focus-visible:ring-2 focus-visible:ring-primary md:grid-cols-[minmax(170px,230px)_1fr_150px]"
+								className="grid grid-cols-1 items-center gap-x-6 gap-y-2 rounded-md px-1 py-3.5 outline-none transition-colors duration-150 hover:bg-surfaceAlt focus-visible:ring-2 focus-visible:ring-primary active:bg-border/40 md:grid-cols-[minmax(170px,230px)_1fr_150px]"
 							>
 								<span className="min-w-0">
 									<span className="block truncate font-bold text-textMain">
@@ -247,7 +279,7 @@ export function RouteMap({
 									</span>
 								</span>
 								<span
-									className="text-sm font-semibold md:text-right"
+									className="text-sm font-semibold tabular-nums md:text-right"
 									style={{
 										color:
 											route.end === "next" ? "var(--text-soft)" : route.color,

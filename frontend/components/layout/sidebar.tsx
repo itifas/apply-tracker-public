@@ -58,7 +58,7 @@ export function Sidebar() {
 								>
 									<span
 										aria-hidden="true"
-										className={`relative z-10 block shrink-0 rounded-full border-2 transition-all ${
+										className={`relative z-10 block shrink-0 rounded-full border-2 transition-colors duration-150 ${
 											active
 												? "-ml-[1px] h-3.5 w-3.5 border-primary bg-primary"
 												: "ml-[1px] h-2.5 w-2.5 border-textSoft/60 bg-surface group-hover:border-textMain"
@@ -75,7 +75,7 @@ export function Sidebar() {
 			<div className="border-t border-border px-6 py-4">
 				<button
 					onClick={handleLogout}
-					className="flex items-center gap-2 rounded-md py-1 text-sm text-textSoft outline-none transition-colors hover:text-danger focus-visible:ring-2 focus-visible:ring-primary"
+					className="flex items-center gap-2 rounded-md py-1 text-sm text-textSoft outline-none transition-[color,transform] duration-150 ease-out hover:text-danger active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-primary"
 				>
 					<LogOut size={16} />
 					Sign out
