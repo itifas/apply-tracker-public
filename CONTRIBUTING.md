@@ -1,58 +1,41 @@
 # Contributing
 
-## Current Target
+Thanks for your interest. Apply Tracker is a personal project maintained by Iakovos Tifas: only the maintainer can change this repository. You can still help by opening an issue, or by forking the repository and opening a pull request, which the maintainer reviews before anything is merged.
 
-- The current target is the v0 desktop prototype.
-- Version 1.0 work should be done in small, focused commits.
-- Do not mix mobile work into v1.0 desktop fixes.
+Please follow the [code of conduct](CODE_OF_CONDUCT.md).
+
+## Reporting bugs and ideas
+
+Open an issue with the bug or feature template. Security problems go through [SECURITY.md](SECURITY.md), not public issues.
 
 ## Setup
 
-1. Copy the local environment template:
+- **Web demo / desktop build:** `cd frontend && npm ci && npm run build:demo`, then serve `frontend/out`.
+- **Server version:** `cp backend/config/.env.example backend/config/.env` and `docker compose up -d`, then open http://localhost:3001.
+- **Desktop app:** `cd desktop && npm ci && npm run build:web && npm start`.
+
+## Branches
+
+| Branch | Purpose |
+|---|---|
+| `main` | Source of truth. All changes land here through pull requests. |
+| `web-demo` | Updated automatically from `main`; deployed by Cloudflare. Don't push to it. |
+| `windows`, `macos`, `linux` | Release branches. The maintainer pushes `main` to them to publish a desktop version. |
+
+Work on a branch named after the change, for example `fix/phone-layout` or `feature/backup`.
+
+## Before opening a pull request
 
 ```sh
-cp backend/config/.env.example backend/config/.env
+cd frontend
+npm run lint
+npx tsc --noEmit
+npm run build:demo
 ```
 
-2. Start the local stack:
+The same checks run automatically on every pull request. Add a line to [CHANGELOG.md](CHANGELOG.md) under "Unreleased" for user-visible changes.
 
-```sh
-docker compose up -d
-```
+## Don't commit
 
-3. Check service status:
-
-```sh
-docker compose ps
-```
-
-4. Open the app at `http://localhost:3001`.
-
-## Branches and Commits
-
-- Create focused branches for each fix or feature.
-- Keep commits small and descriptive.
-- Avoid mixing unrelated refactors with behavior changes.
-- Keep v1.0 desktop fixes separate from mobile/responsive work.
-- Document any setup or migration steps in the pull request.
-
-## Checks Before Pull Request
-
-Run lint before opening a pull request:
-
-```sh
-npm --prefix frontend run lint
-```
-
-If you changed dependencies, explain why in the pull request.
-
-## Files to Avoid Committing
-
-- Do not commit `.env` files.
-- Do not commit real secrets, API keys, database passwords, or local credentials.
-- Do not commit `node_modules`, `.next`, local logs, local database files, or temporary files.
-- Avoid committing `package-lock.json` unless dependencies changed intentionally.
-
-## Environment Files
-
-Use `backend/config/.env.example` as the public template and `backend/config/.env` as your ignored local runtime file. Keep examples public-safe and replace placeholder secrets for any real deployment.
+- `.env` files, real secrets, API keys or passwords
+- `node_modules`, `.next`, `out`, `desktop/app`, `desktop/dist`, logs or local database files

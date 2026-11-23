@@ -1,12 +1,5 @@
 # Scripts
 
-This folder is reserved for frontend-only utility scripts.
+- `build-demo.mjs`: builds the static, browser-only demo into `frontend/out` (`npm run build:demo`). The desktop app reuses this build through `desktop/build-web.js`.
 
-Current state:
-
-- No custom scripts are checked in yet.
-
-Related commands:
-
-- Prisma seed runs from `frontend/`: `npm run prisma:seed`
-- Docker lifecycle scripts are in `../helpers/docker/`
+The Prisma seed runs with `npm run prisma:seed` from `frontend/`.

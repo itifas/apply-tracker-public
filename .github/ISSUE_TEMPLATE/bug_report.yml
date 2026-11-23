@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in Apply Tracker doesn't work as expected.
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: version
+    attributes:
+      label: Where did it happen?
+      options:
+        - Web demo (tracker.iakovostifas.com)
+        - Desktop app on Windows
+        - Desktop app on macOS
+        - Desktop app on Linux
+        - Self-hosted server version
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Applications
+        2. Click ...
+  - type: input
+    id: app-version
+    attributes:
+      label: App version and browser
+      placeholder: "0.1.2, Chrome 131"
+  - type: markdown
+    attributes:
+      value: Please don't paste real personal data (names, emails, salaries) from your tracker. Report security problems privately as described in SECURITY.md.

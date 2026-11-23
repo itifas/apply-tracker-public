@@ -1,40 +1,34 @@
 # Backend
 
-This folder owns runtime orchestration and local environment configuration.
-
-## Structure
+Runtime configuration for the server version of Apply Tracker (Next.js API + PostgreSQL). The application code itself lives in [`../frontend`](../frontend).
 
 ```text
 backend/
-  config/            # local env files
-  docker/            # backend image startup scripts
+  config/   # .env.example (public template) and your ignored local .env
+  docker/   # Dockerfile and container start script for the app service
 ```
 
-Operational scripts are in `../helpers/` at the workspace root.
-Compose file is at `../docker-compose.yml`.
+## Run the stack
 
-## Security
+From the repository root:
 
-- Put real keys in `backend/config/.env` only.
-- Keep placeholders in `backend/config/.env.example`.
-- `.env` is git-ignored.
-
-## Run Stack
-
-```powershell
-pwsh ../helpers/env/init.ps1
-pwsh ../helpers/docker/start.ps1
+```sh
+cp backend/config/.env.example backend/config/.env
+docker compose up -d
 ```
 
-## Common Operations
+The app runs at http://localhost:3001 and the database in the `db` service (see [`../docker-compose.yml`](../docker-compose.yml)).
 
-```powershell
-pwsh ../helpers/docker/status.ps1
-pwsh ../helpers/docker/logs.ps1
-pwsh ../helpers/docker/logs.ps1 -Service app
-pwsh ../helpers/docker/restart.ps1
-pwsh ../helpers/docker/stop.ps1
-pwsh ../helpers/docker/clean.ps1
+```sh
+docker compose ps                    # status
+docker compose logs app --tail=100   # app logs
+docker compose restart app
+docker compose down                  # stop; data stays in the postgres-data volume
+docker compose down -v               # stop and delete the database
 ```
 
-Current app code is in `../frontend`.
+## Secrets
+
+- Put real values only in `backend/config/.env`, which git ignores.
+- Keep `backend/config/.env.example` public-safe with placeholders.
+- Change `AUTH_SECRET` and the seeded password before any real deployment.

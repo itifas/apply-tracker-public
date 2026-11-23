@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Try the web demo
+    url: https://tracker.iakovostifas.com
+    about: Check whether the problem also happens in the latest version.
+  - name: Report a security problem
+    url: https://github.com/itifas/apply-tracker-public/blob/main/SECURITY.md
+    about: Please report security issues privately, not as a public issue.
