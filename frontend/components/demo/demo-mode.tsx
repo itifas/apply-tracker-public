@@ -68,9 +68,9 @@ export function DemoBanner() {
 	}
 
 	return (
-		<div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-border bg-primary/10 px-4 py-2 text-center text-xs text-textMain">
+		<div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-border bg-surface px-4 py-2 text-center text-[13px] text-textSoft">
 			<span>
-				<strong>Demo</strong> · Your changes are saved only in this browser.
+				This is a demo. Your changes are saved only in this browser.
 			</span>
 			<button
 				type="button"

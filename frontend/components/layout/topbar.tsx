@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useComingSoon } from "@/components/feedback/in-progress";
-import { Bell, Search, User, Sun, Moon } from "lucide-react";
+import { Bell, Search, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 type CurrentUser = {
@@ -41,13 +41,13 @@ export function Topbar() {
 	const displayDetail = user?.email || user?.username || "Signed in";
 
 	return (
-		<header className="bg-surface/92 backdrop-blur border-b border-border px-8 py-4 sticky top-0 z-10 shadow-[0_1px_0_var(--border)]">
+		<header className="sticky top-0 z-10 border-b border-border bg-background/90 px-8 py-3 backdrop-blur">
 			<div className="flex items-center justify-between">
 				<div className="flex-1 max-w-xl">
 					<form className="relative" role="search" onSubmit={handleSearch}>
 						<Search
-							className="absolute left-3 top-1/2 -translate-y-1/2 rounded-md bg-[linear-gradient(135deg,var(--surfaceAlt),var(--background))] p-1 text-textSoft"
-							size={20}
+							className="absolute left-3 top-1/2 -translate-y-1/2 text-textSoft"
+							size={17}
 						/>
 						<input
 							type="text"
@@ -55,17 +55,17 @@ export function Topbar() {
 							onChange={(event) => setSearch(event.target.value)}
 							placeholder="Search applications..."
 							aria-label="Search applications"
-							className="w-full rounded-lg border border-border bg-[linear-gradient(180deg,var(--surface),var(--background))] pl-10 pr-4 py-2 text-textMain placeholder:text-textSoft shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
+							className="w-full rounded-md border border-border bg-surface py-2 pl-9 pr-4 text-sm text-textMain placeholder:text-textSoft focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
 						/>
 					</form>
 				</div>
 
-				<div className="flex items-center gap-4 ml-4">
+				<div className="ml-4 flex items-center gap-2">
 					<button
 						onClick={() =>
 							setTheme(resolvedTheme === "dark" ? "light" : "dark")
 						}
-						className="rounded-xl border border-border bg-[linear-gradient(180deg,var(--surface),var(--surfaceAlt))] p-2 transition-all hover:-translate-y-0.5 hover:shadow-sm"
+						className="rounded-md p-2 text-textSoft transition-colors hover:bg-surface hover:text-textMain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
 						title={
 							mounted
 								? `Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`
@@ -74,30 +74,30 @@ export function Topbar() {
 					>
 						{mounted ? (
 							resolvedTheme === "dark" ? (
-								<Moon size={20} className="text-textSoft" />
+								<Moon size={18} />
 							) : (
-								<Sun size={20} className="text-textSoft" />
+								<Sun size={18} />
 							)
 						) : (
-							<span className="block h-5 w-5" aria-hidden="true" />
+							<span className="block h-[18px] w-[18px]" aria-hidden="true" />
 						)}
 					</button>
 
 					<button
 						onClick={comingSoon("Notifications")}
 						title="Notifications (coming soon)"
-						className="rounded-xl border border-border bg-[linear-gradient(180deg,var(--surface),var(--surfaceAlt))] p-2 transition-all hover:-translate-y-0.5 hover:shadow-sm relative"
+						className="rounded-md p-2 text-textSoft transition-colors hover:bg-surface hover:text-textMain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative"
 					>
-						<Bell size={20} className="text-textSoft" />
+						<Bell size={18} />
 					</button>
 
-					<div className="flex items-center gap-3 pl-4 border-l border-border">
+					<div className="ml-2 flex items-center gap-3 border-l border-border pl-4">
 						<div className="text-right">
 							<p className="text-sm font-medium text-textMain">{displayName}</p>
 							<p className="text-xs text-textSoft">{displayDetail}</p>
 						</div>
-						<div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-[linear-gradient(135deg,var(--primary),var(--secondary),var(--accent))] text-white shadow-sm">
-							<User size={18} />
+						<div className="flex h-9 w-9 items-center justify-center rounded-full bg-textMain text-sm font-bold text-surface">
+							{displayName.charAt(0).toUpperCase()}
 						</div>
 					</div>
 				</div>

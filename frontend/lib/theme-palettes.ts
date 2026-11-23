@@ -1,6 +1,8 @@
-export const PALETTE_STORAGE_KEY = "apply-tracker.palette";
+// v2: everyone starts on the Wayfinding palette after the redesign.
+export const PALETTE_STORAGE_KEY = "apply-tracker.palette.v2";
 
 export type PaletteId =
+	| "wayfinding"
 	| "indigo-aurora"
 	| "ocean-teal"
 	| "sunset-amber"
@@ -39,9 +41,51 @@ export type ThemePalette = {
 	dark: PaletteVariables;
 };
 
-export const defaultPaletteId: PaletteId = "indigo-aurora";
+export const defaultPaletteId: PaletteId = "wayfinding";
 
 export const themePalettes: ThemePalette[] = [
+	{
+		id: "wayfinding",
+		name: "Wayfinding",
+		description: "Platform grey and sign white, with cobalt for actions.",
+		swatches: ["#1f4fd8", "#138a52", "#f2c230", "#d23a2f"],
+		light: {
+			background: "#e9edf0",
+			surface: "#ffffff",
+			surfaceAlt: "#f3f5f7",
+			card: "#ffffff",
+			primary: "#1f4fd8",
+			primaryHover: "#1a43b8",
+			secondary: "#138a52",
+			accent: "#f2c230",
+			highlight: "#8e7cc3",
+			textMain: "#14202b",
+			textSoft: "#5a6875",
+			border: "#d3dae0",
+			success: "#138a52",
+			danger: "#d23a2f",
+			warning: "#b7791f",
+			info: "#1f4fd8",
+		},
+		dark: {
+			background: "#10161c",
+			surface: "#172029",
+			surfaceAlt: "#1d2833",
+			card: "#1a242e",
+			primary: "#6e95ff",
+			primaryHover: "#5a83f5",
+			secondary: "#3fbf83",
+			accent: "#f2c230",
+			highlight: "#ab9ce0",
+			textMain: "#e8edf2",
+			textSoft: "#93a1ae",
+			border: "#2a3642",
+			success: "#3fbf83",
+			danger: "#f0675d",
+			warning: "#e0a63a",
+			info: "#6e95ff",
+		},
+	},
 	{
 		id: "indigo-aurora",
 		name: "Indigo Aurora",

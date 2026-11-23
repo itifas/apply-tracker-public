@@ -2,7 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default palette: "Wayfinding". Cool platform grey, sign-white panels,
+   navy ink and one cobalt line for actions. */
 :root {
+	--background: #e9edf0;
+	--surface: #ffffff;
+	--surface-alt: #f3f5f7;
+	--card: #ffffff;
+	--primary: #1f4fd8;
+	--primary-hover: #1a43b8;
+	--secondary: #138a52;
+	--accent: #f2c230;
+	--highlight: #8e7cc3;
+	--text-main: #14202b;
+	--text-soft: #5a6875;
+	--border: #d3dae0;
+	--success: #138a52;
+	--warning: #b7791f;
+	--danger: #d23a2f;
+	--info: #1f4fd8;
+	--muted-surface: #f3f5f7;
+	--canvas-glow-1: transparent;
+	--canvas-glow-2: transparent;
+	--canvas-glow-3: transparent;
+
+	/* Route map lines, one per application status. */
+	--line-applied: #7a8794;
+	--line-interview: #1f4fd8;
+	--line-offer: #138a52;
+	--line-rejected: #d23a2f;
+	--line-ghosted: #8e7cc3;
+	/* Signal yellow: only for follow-ups that are due. */
+	--signal: #f2c230;
+	--signal-ink: #5c4500;
+}
+
+.dark {
+	--background: #10161c;
+	--surface: #172029;
+	--surface-alt: #1d2833;
+	--card: #1a242e;
+	--primary: #6e95ff;
+	--primary-hover: #5a83f5;
+	--secondary: #3fbf83;
+	--accent: #f2c230;
+	--highlight: #ab9ce0;
+	--text-main: #e8edf2;
+	--text-soft: #93a1ae;
+	--border: #2a3642;
+	--success: #3fbf83;
+	--warning: #e0a63a;
+	--danger: #f0675d;
+	--info: #6e95ff;
+	--muted-surface: #141c24;
+	--canvas-glow-1: transparent;
+	--canvas-glow-2: transparent;
+	--canvas-glow-3: transparent;
+
+	--line-applied: #8795a3;
+	--line-interview: #6e95ff;
+	--line-offer: #3fbf83;
+	--line-rejected: #f0675d;
+	--line-ghosted: #ab9ce0;
+	--signal: #f2c230;
+	--signal-ink: #f2c230;
+}
+
+:root[data-palette="indigo-aurora"] {
 	--background: #f4f7ff;
 	--surface: #fcfdff;
 	--surface-alt: #eef2ff;
@@ -25,7 +91,7 @@
 	--canvas-glow-3: rgba(245, 158, 11, 0.05);
 }
 
-.dark {
+.dark[data-palette="indigo-aurora"] {
 	--background: #09111f;
 	--surface: #101a33;
 	--surface-alt: #16213c;
@@ -288,10 +354,36 @@ html {
 
 body {
 	@apply bg-background text-textMain antialiased;
+	font-family: "Overpass Variable", ui-sans-serif, system-ui, sans-serif;
+	font-feature-settings: "tnum" 1;
 	overflow-x: hidden;
 	background-image:
 		radial-gradient(circle at 10% 10%, var(--canvas-glow-1), transparent 32%),
 		radial-gradient(circle at 88% 4%, var(--canvas-glow-2), transparent 28%),
 		radial-gradient(circle at 50% 100%, var(--canvas-glow-3), transparent 24%);
 	background-attachment: fixed;
+}
+
+@layer components {
+	/* Route map: each application is a line moving through hiring stages. */
+	.route-segment {
+		transform-origin: left center;
+		animation: route-draw 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: calc(var(--row, 0) * 70ms + var(--seg, 0) * 90ms);
+	}
+
+	@keyframes route-draw {
+		from {
+			transform: scaleX(0);
+		}
+		to {
+			transform: scaleX(1);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.route-segment {
+			animation: none;
+		}
+	}
 }
