@@ -1,42 +1,24 @@
-## Download Apply Tracker {{VERSION}}
+Apply Tracker {{VERSION}} for Windows, macOS and Linux. Your data stays on your computer, and the app installs new versions itself when they're released.
 
-Pick your system below, download the file and open it. Your data stays on your computer, and the app updates itself when a new version comes out.
+### Windows 10 and 11
 
-### 🪟 Windows 10 / 11
+Download **[Apply-Tracker-Setup-{{V}}.exe]({{URL}}/Apply-Tracker-Setup-{{V}}.exe)** and run it. Windows may say "Windows protected your PC" because the app isn't code-signed yet; choose **More info**, then **Run anyway**.
 
-| Download | |
-|---|---|
-| **[Apply-Tracker-Setup-{{V}}.exe]({{URL}}/Apply-Tracker-Setup-{{V}}.exe)** | Installer for Windows (64-bit) |
+### macOS
 
-1. Run the installer.
-2. If you see **"Windows protected your PC"**, click **More info → Run anyway**. The app isn't code-signed yet, so Windows shows this warning for it.
-3. Start **Apply Tracker** from the Start menu or the desktop shortcut.
+- Apple Silicon (M1 to M4): **[Apply-Tracker-{{V}}-mac-arm64.dmg]({{URL}}/Apply-Tracker-{{V}}-mac-arm64.dmg)**
+- Intel: **[Apply-Tracker-{{V}}-mac-x64.dmg]({{URL}}/Apply-Tracker-{{V}}-mac-x64.dmg)**
 
-### 🍎 macOS
+To check which you have, open the Apple menu and choose About This Mac. Drag the app into Applications. The first time, right-click it and choose Open, because it isn't notarized yet. Updates on macOS are manual for now: download the new version from this page.
 
-| Your Mac | Download |
-|---|---|
-| Apple Silicon (M1, M2, M3, M4) | **[Apply-Tracker-{{V}}-mac-arm64.dmg]({{URL}}/Apply-Tracker-{{V}}-mac-arm64.dmg)** |
-| Intel | **[Apply-Tracker-{{V}}-mac-x64.dmg]({{URL}}/Apply-Tracker-{{V}}-mac-x64.dmg)** |
+### Linux
 
-Not sure which one? Apple menu → **About This Mac**: "Chip: Apple M…" means Apple Silicon, "Processor: Intel" means Intel.
+- Debian, Ubuntu, Mint: **[.deb]({{URL}}/Apply-Tracker-{{V}}-linux-amd64.deb)**, then `sudo apt install ./Apply-Tracker-{{V}}-linux-amd64.deb`
+- Fedora, RHEL, openSUSE: **[.rpm]({{URL}}/Apply-Tracker-{{V}}-linux-x86_64.rpm)**, then `sudo dnf install ./Apply-Tracker-{{V}}-linux-x86_64.rpm`
+- Any distribution: **[.AppImage]({{URL}}/Apply-Tracker-{{V}}-linux-x86_64.AppImage)**, then `chmod +x` it and run it
 
-1. Open the `.dmg` and drag **Apply Tracker** into **Applications**.
-2. The first time, **right-click** the app → **Open** → **Open**. The app isn't notarized by Apple yet.
-3. On macOS, updates have to be installed by hand for now: download the new `.dmg` from this page.
+### Without installing
 
-### 🐧 Linux
+Try the web demo at https://tracker.iakovostifas.com. It runs in your browser with sample data.
 
-| Your system | Download | Install |
-|---|---|---|
-| Debian, Ubuntu, Linux Mint, Pop!_OS | **[.deb]({{URL}}/Apply-Tracker-{{V}}-linux-amd64.deb)** | `sudo apt install ./Apply-Tracker-{{V}}-linux-amd64.deb` |
-| Fedora, RHEL, openSUSE | **[.rpm]({{URL}}/Apply-Tracker-{{V}}-linux-x86_64.rpm)** | `sudo dnf install ./Apply-Tracker-{{V}}-linux-x86_64.rpm` |
-| Any distribution (no install) | **[.AppImage]({{URL}}/Apply-Tracker-{{V}}-linux-x86_64.AppImage)** | `chmod +x Apply-Tracker-*.AppImage` then run it |
-
-### 🌐 Try it without installing
-
-Web demo: **https://tracker.iakovostifas.com**. It runs in your browser with sample data.
-
----
-
-<sub>The files ending in `.yml`, `.blockmap` and `.zip` are used by automatic updates; you don't need to download them. Licensed under the MIT License.</sub>
+The `.yml`, `.blockmap` and `.zip` files below are used by automatic updates, so you can ignore them.
