@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BriefcaseBusiness, Loader2, Lock, User } from "lucide-react";
+import { isDemoMode } from "@/lib/demo/config";
 
 export default function LoginPage() {
 	const router = useRouter();
@@ -48,7 +49,11 @@ export default function LoginPage() {
 							<h1 className="text-xl font-semibold text-textMain">
 								Jobs Tracker
 							</h1>
-							<p className="text-sm text-textSoft">Sign in to continue</p>
+							<p className="text-sm text-textSoft">
+								{isDemoMode
+									? "Demo: any username and password works"
+									: "Sign in to continue"}
+							</p>
 						</div>
 					</div>
 				</div>

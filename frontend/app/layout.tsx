@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ToastProvider } from "@/components/feedback/toast";
+import { DemoFetchInstaller } from "@/components/demo/demo-mode";
 
 export const metadata: Metadata = {
 	title: "Jobs Tracker",
@@ -16,6 +17,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" data-palette="indigo-aurora" suppressHydrationWarning>
 			<body>
+				<DemoFetchInstaller />
 				<ThemeProvider>
 					<ToastProvider>{children}</ToastProvider>
 				</ThemeProvider>

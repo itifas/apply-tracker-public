@@ -1,0 +1,11 @@
+// Cloudflare Worker that serves the static demo (frontend/out).
+// Build command:  npm ci && npm run build:demo
+// Deploy command: npx wrangler deploy
+{
+	"name": "apply-tracker-demo",
+	"compatibility_date": "2026-11-01",
+	"assets": {
+		"directory": "./out",
+		"not_found_handling": "404-page"
+	}
+}

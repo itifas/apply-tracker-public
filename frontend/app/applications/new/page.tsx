@@ -1,10 +1,49 @@
+"use client";
+
+import { FormEvent, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { StepStatus } from "@prisma/client";
 import { AppShell } from "@/components/layout/app-shell";
-import { createApplicationAction } from "@/app/applications/actions";
-import { ArrowLeft } from "lucide-react";
+import { useToast } from "@/components/feedback/toast";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 export default function NewApplicationPage() {
+	const router = useRouter();
+	const toast = useToast();
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		setIsSubmitting(true);
+
+		const values = Object.fromEntries(new FormData(event.currentTarget));
+
+		try {
+			const response = await fetch("/api/applications", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(values),
+			});
+
+			if (!response.ok) {
+				const body = (await response.json().catch(() => null)) as {
+					error?: string;
+				} | null;
+				throw new Error(body?.error ?? "Could not create the application.");
+			}
+
+			toast.success("Application created");
+			router.push("/applications");
+		} catch (error) {
+			toast.error("Create failed", {
+				description:
+					error instanceof Error ? error.message : "Please try again.",
+			});
+			setIsSubmitting(false);
+		}
+	}
+
 	return (
 		<AppShell>
 			<div className="mx-auto max-w-4xl space-y-6">
@@ -27,7 +66,7 @@ export default function NewApplicationPage() {
 						New Application
 					</h2>
 					<form
-						action={createApplicationAction}
+						onSubmit={handleSubmit}
 						className="grid grid-cols-1 gap-4 md:grid-cols-2"
 					>
 						<input
@@ -127,8 +166,10 @@ export default function NewApplicationPage() {
 						<div className="md:col-span-2">
 							<button
 								type="submit"
-								className="w-full rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover md:w-auto"
+								disabled={isSubmitting}
+								className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primaryHover disabled:opacity-70 md:w-auto"
 							>
+								{isSubmitting && <Loader2 size={16} className="animate-spin" />}
 								Create Application
 							</button>
 						</div>
