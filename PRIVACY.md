@@ -29,6 +29,18 @@ If you're in the European Economic Area or the UK, you have the right to access,
 - Tracker data stays under your sole control and can be deleted at any time as described above.
 - If you run your own server copy of Apply Tracker (the PostgreSQL version), you are the controller of the data it stores and need your own privacy notice.
 
+## Planned online version
+
+We plan to offer an optional online version with an account, so your tracker can be stored in our database and used on several devices. Nothing in this section happens yet. If it launches:
+
+- **Optional.** The web demo and the desktop app keep working without an account, with data only on your device.
+- **You agree first.** Before anything is uploaded you'll see an updated version of this notice and be asked to agree. Nothing already on your device is uploaded unless you choose to.
+- **Analysis only with permission.** If you allow it, data in your account may be analysed to improve Apply Tracker and to publish general insights about job searching (for example typical response times, or how many applications lead to interviews). Analysis uses anonymised, combined data; results won't identify you or anyone in your tracker. Contact details of recruiters and other people you add are left out.
+- **No selling, no advertising.** Personal data won't be sold or used for ads.
+- **Your control.** You can download your data, withdraw permission for analysis, and delete your account at any time.
+
+Under the GDPR, storing your account data would rely on the contract to provide the service (Art. 6(1)(b)), and analysis on your consent (Art. 6(1)(a)).
+
 Apply Tracker is not directed at children under 16.
 
 ## Contact

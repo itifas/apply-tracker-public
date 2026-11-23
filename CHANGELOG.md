@@ -5,6 +5,7 @@ All notable changes to Apply Tracker. Versions match the git tags and the deskto
 ## Unreleased
 
 - Dashboard motion and interaction polish: route lines draw in once per session within ~450ms, toasts slide in and out, press feedback on buttons, hover only on devices that can hover, tabular numerals where numbers line up.
+- Privacy notice and terms describe the planned optional online version: database storage, consent-based anonymised analysis, and user control over their data.
 - Repository organization: Docker Compose file, changelog, issue and pull request templates, automatic checks, code owners.
 
 ## 0.1.2 (23 November 2026)

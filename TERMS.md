@@ -28,6 +28,10 @@ Copyright © 2026 Iakovos Tifas. The source code is released under the [MIT Lice
 
 Apply Tracker is provided "as is", without warranty of any kind. To the extent permitted by law, the author is not liable for lost data or other damage arising from its use. Nothing here limits consumer rights that can't be waived.
 
+## Future online features
+
+Apply Tracker may later offer an optional online account that stores your data in our database and, with your permission, uses it in anonymised, combined form for analysis and research about job searching. Those features will come with updated terms and an updated privacy notice that you'll be asked to accept before using them. Using the demo or the desktop app without an account isn't affected. See [PRIVACY.md](PRIVACY.md#planned-online-version).
+
 ## Changes
 
 These terms may change as the project develops; the date above shows the latest version. Questions can be sent through the contact details on [iakovostifas.com](https://www.iakovostifas.com).

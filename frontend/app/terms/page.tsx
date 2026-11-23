@@ -68,6 +68,18 @@ export default function TermsPage() {
 				limits rights you have under consumer law that can&apos;t be waived.
 			</p>
 
+			<h2>Future online features</h2>
+			<p>
+				Apply Tracker may later offer an optional online account that stores
+				your data in our database, and, with your permission, uses it in
+				anonymised, combined form for analysis and research about job
+				searching. Those features will come with updated terms and an updated
+				privacy notice, which you&apos;ll be asked to accept before using them.
+				Using the demo or the desktop app without an account will not be
+				affected. See the{" "}
+				<a href="/privacy">privacy notice</a> for what is planned.
+			</p>
+
 			<h2>Changes</h2>
 			<p>
 				These terms may change as the project develops. The date at the top

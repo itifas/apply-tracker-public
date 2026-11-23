@@ -10,7 +10,8 @@ Report problems to the maintainer through the contact details on [iakovostifas.c
 
 These principles guide every change to Apply Tracker:
 
-- **Your data stays yours.** Tracker data is stored on the user's device. No analytics, advertising or selling of data.
+- **Your data stays yours.** Tracker data is stored on the user's device unless they choose an online account. No advertising and no selling of data.
+- **Analysis only with consent.** Any analysis of user data uses anonymised, combined data, only from people who agreed to it, and never includes the contact details of third parties such as recruiters.
 - **Collect only what's needed.** New features shouldn't send personal data anywhere unless the user clearly asks for it (for example a future email integration they switch on).
 - **Be honest in the interface.** Unfinished features are labelled as in progress, never shown as working. No dark patterns.
 - **Respect other people's information.** Sample data uses invented people and `example.com` addresses. Real company names appear only as clearly labelled examples, with no claim of affiliation.

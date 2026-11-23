@@ -70,6 +70,40 @@ export default function PrivacyPage() {
 				privacy notice.
 			</p>
 
+			<h2>Planned online version</h2>
+			<p>
+				We plan to offer an optional online version of Apply Tracker with an
+				account, so your tracker can be stored in our database and used on
+				several devices. Nothing described in this section happens yet. If it
+				launches:
+			</p>
+			<ul>
+				<li>
+					It will be optional. The web demo and the desktop app will keep
+					working without an account, with your data only on your device.
+				</li>
+				<li>
+					Before anything is uploaded, you&apos;ll be shown an updated version
+					of this notice and asked to agree. Nothing already on your device
+					will be uploaded without you choosing to.
+				</li>
+				<li>
+					If you allow it, we may analyse the data in your account to improve
+					Apply Tracker and to publish general insights about job searching,
+					such as typical response times or how many applications lead to
+					interviews. Analysis will use anonymised, combined data, and the
+					results won&apos;t identify you or anyone in your tracker. Contact
+					details of recruiters and other people you add will be left out.
+				</li>
+				<li>
+					We won&apos;t sell your personal data or use it for advertising.
+				</li>
+				<li>
+					You&apos;ll be able to download your data, withdraw your permission
+					for analysis, and delete your account at any time.
+				</li>
+			</ul>
+
 			<h2>Children</h2>
 			<p>Apply Tracker is not directed at children under 16.</p>
 
