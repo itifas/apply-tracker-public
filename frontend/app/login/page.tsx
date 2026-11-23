@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BriefcaseBusiness, Loader2, Lock, User } from "lucide-react";
 import { isDemoMode } from "@/lib/demo/config";
@@ -47,7 +48,7 @@ export default function LoginPage() {
 						</div>
 						<div>
 							<h1 className="text-xl font-semibold text-textMain">
-								Jobs Tracker
+								Apply Tracker
 							</h1>
 							<p className="text-sm text-textSoft">
 								{isDemoMode
@@ -126,6 +127,17 @@ export default function LoginPage() {
 						{isSubmitting ? "Signing in..." : "Sign in"}
 					</button>
 				</form>
+				<p className="border-t border-border px-8 py-4 text-center text-xs text-textSoft">
+					By signing in you agree to the{" "}
+					<Link href="/terms" className="font-semibold text-primary hover:underline">
+						terms
+					</Link>
+					. Read how your data is handled in the{" "}
+					<Link href="/privacy" className="font-semibold text-primary hover:underline">
+						privacy notice
+					</Link>
+					.
+				</p>
 			</div>
 		</main>
 	);

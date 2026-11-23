@@ -232,10 +232,18 @@ npm --prefix frontend run lint
 - Local/demo credentials are not production credentials.
 - See [SECURITY.md](SECURITY.md) for vulnerability reporting guidance.
 
+## Privacy, Terms and Principles
+
+- [PRIVACY.md](PRIVACY.md): what data is stored, Cloudflare hosting, desktop update checks, and your GDPR rights.
+- [TERMS.md](TERMS.md): terms of use, copyright, and the note on company names in the sample data.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): how contributors treat each other and the principles the app follows.
+
+Company names in the sample data (Microsoft, Google, Amazon, Meta, Stripe, Airbnb) are trademarks of their owners and are used only as examples. Apply Tracker is not affiliated with any of them. Sample contacts are invented and use `example.com` addresses.
+
 ## Attributions
 
 See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for design attribution notes preserved from the original design exploration.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. Copyright (c) 2026 Iakovos Tifas. See [LICENSE](LICENSE).

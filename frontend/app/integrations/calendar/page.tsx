@@ -20,7 +20,7 @@ export default function CalendarIntegrationPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "jobs-tracker-reminders.ics";
+    a.download = "apply-tracker-reminders.ics";
     a.click();
     URL.revokeObjectURL(url);
   }

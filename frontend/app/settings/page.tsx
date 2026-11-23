@@ -35,7 +35,7 @@ export default function SettingsPage() {
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement("a");
 		a.href = url;
-		a.download = "jobs-tracker-export.csv";
+		a.download = "apply-tracker-export.csv";
 		a.click();
 		URL.revokeObjectURL(url);
 	}

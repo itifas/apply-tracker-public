@@ -4,7 +4,13 @@ import {
 	verifySessionToken,
 } from "@/lib/auth/session";
 
-const publicPaths = ["/login", "/api/auth/login", "/api/auth/logout"];
+const publicPaths = [
+	"/login",
+	"/privacy",
+	"/terms",
+	"/api/auth/login",
+	"/api/auth/logout",
+];
 
 function isPublicPath(pathname: string) {
 	return publicPaths.some(

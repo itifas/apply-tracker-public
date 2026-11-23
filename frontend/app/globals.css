@@ -387,3 +387,22 @@ body {
 		}
 	}
 }
+
+/* Long-form text on the privacy and terms pages. */
+.legal-prose h2 {
+	@apply mb-3 mt-10 text-xl font-extrabold tracking-[-0.01em] text-textMain;
+}
+.legal-prose p,
+.legal-prose li {
+	@apply leading-7 text-textMain;
+}
+.legal-prose p + p,
+.legal-prose ul + p {
+	@apply mt-4;
+}
+.legal-prose ul {
+	@apply mt-3 list-disc space-y-2 pl-6;
+}
+.legal-prose a {
+	@apply font-semibold text-primary underline-offset-2 hover:underline;
+}

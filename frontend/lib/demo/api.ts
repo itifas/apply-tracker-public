@@ -458,7 +458,7 @@ export async function handleDemoRequest(
 			return file(
 				buildReminderICS(reminders),
 				"text/calendar",
-				"jobs-tracker-reminders.ics",
+				"apply-tracker-reminders.ics",
 			);
 		}
 		case "GET integrations/:id":

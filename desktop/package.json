@@ -1,8 +1,8 @@
 {
 	"name": "apply-tracker-desktop",
 	"productName": "Apply Tracker",
-	"version": "0.1.1",
-	"description": "Apply Tracker for Windows",
+	"version": "0.1.2",
+	"description": "Track job applications, interview stages and follow-ups",
 	"author": {
 		"name": "Iakovos Tifas",
 		"email": "itifas@users.noreply.github.com"

@@ -41,7 +41,7 @@ export async function GET() {
 		status: 200,
 		headers: {
 			"Content-Type": "text/calendar",
-			"Content-Disposition": "attachment; filename=jobs-tracker-reminders.ics",
+			"Content-Disposition": "attachment; filename=apply-tracker-reminders.ics",
 		},
 	});
 }

@@ -33,7 +33,7 @@ export function buildReminderICS(reminders: ReminderWithApplication[]): string {
 	const header = [
 		"BEGIN:VCALENDAR",
 		"VERSION:2.0",
-		"PRODID:-//Jobs Tracker//EN",
+		"PRODID:-//Apply Tracker//EN",
 		"CALSCALE:GREGORIAN",
 	];
 
