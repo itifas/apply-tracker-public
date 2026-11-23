@@ -1,27 +1,35 @@
-# Builds the desktop app for Windows, macOS and Linux and publishes one
-# GitHub Release with all installers. Installed apps check the latest
+# Builds the desktop app when a platform branch is updated:
+#   windows -> .exe installer
+#   macos   -> .dmg and .zip (Intel and Apple Silicon)
+#   linux   -> .AppImage
+#
+# The installer is added to the GitHub Release for the version in
+# desktop/package.json (e.g. v0.1.0), creating the release if needed, so all
+# platforms of one version share one release. Installed apps check the latest
 # release for updates on launch.
 #
-# To release, push a version tag (the app version comes from the tag):
-#   git tag v0.1.0 && git push origin v0.1.0
-# Running it by hand (Actions tab) builds the installers without releasing.
+# To ship a version: bump "version" in desktop/package.json on main, then
+# update the platform branches from main and push them.
 name: Desktop release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [windows, macos, linux]
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: desktop-release-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: >-
+      ${{ github.ref_name == 'windows' && 'windows-latest'
+       || github.ref_name == 'macos' && 'macos-latest'
+       || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,18 +49,19 @@ jobs:
         run: npm ci
         working-directory: desktop
 
-      - name: Set version from tag
-        if: startsWith(github.ref, 'refs/tags/v')
-        shell: bash
-        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version --allow-same-version
-        working-directory: desktop
-
       - name: Build web app
         run: npm run build:web
         working-directory: desktop
 
-      - name: Build installers
-        run: npm run dist
+      - name: Build installer
+        shell: bash
+        run: |
+          case "$GITHUB_REF_NAME" in
+            windows) target=--win ;;
+            macos) target=--mac ;;
+            *) target=--linux ;;
+          esac
+          npx electron-builder $target --publish never
         working-directory: desktop
         env:
           # No code-signing certificates yet; build unsigned.
@@ -60,7 +69,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: desktop-${{ runner.os }}
+          name: desktop-${{ github.ref_name }}
           if-no-files-found: error
           path: |
             desktop/dist/*.exe
@@ -71,20 +80,30 @@ jobs:
             desktop/dist/latest*.yml
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: contains(fromJSON('["windows","macos","linux"]'), github.ref_name)
     needs: build
     runs-on: ubuntu-latest
+    concurrency:
+      group: desktop-release-publish
+      cancel-in-progress: false
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: desktop/package.json
+
       - uses: actions/download-artifact@v4
         with:
+          name: desktop-${{ github.ref_name }}
           path: dist
-          merge-multiple: true
 
-      - name: Publish GitHub Release
+      - name: Add installer to the GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/* \
-            --repo "$GITHUB_REPOSITORY" \
-            --title "Apply Tracker $GITHUB_REF_NAME" \
-            --generate-notes
+          tag="v$(node -p "require('./desktop/package.json').version")"
+          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" --title "Apply Tracker $tag" \
+              --notes "Download the installer for your system below."
+          fi
+          gh release upload "$tag" dist/* --repo "$GITHUB_REPOSITORY" --clobber

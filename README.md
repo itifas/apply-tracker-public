@@ -102,24 +102,41 @@ The app container uses `backend/config/.env` via Docker Compose. Do not commit r
 
 ## Live Demo and Desktop App
 
+### Branches
+
+| Branch | Purpose |
+|---|---|
+| `main` | All source code and documentation. Work happens here. |
+| `web-demo` | Deployed by Cloudflare to `tracker.iakovostifas.com`. |
+| `windows` | Pushing builds the Windows installer (`.exe`). |
+| `macos` | Pushing builds the macOS app (`.dmg`, `.zip`). |
+| `linux` | Pushing builds the Linux app (`.AppImage`). |
+
+The release branches hold the same code as `main`. Update them from `main` when you want to publish:
+
+```sh
+git push origin main:web-demo   # redeploy the web demo
+git push origin main:windows    # build and release Windows
+git push origin main:macos      # build and release macOS
+git push origin main:linux      # build and release Linux
+```
+
 ### Web demo (Cloudflare)
 
 `npm --prefix frontend run build:demo` builds a static version of the app into `frontend/out`. It needs no server or database: data is stored in the visitor's browser, with sample data preloaded and a "Reset sample data" button.
 
-To host it as a Cloudflare Worker (uses `frontend/wrangler.jsonc`):
+Cloudflare setup (one time, uses `frontend/wrangler.jsonc`):
 
 1. Cloudflare dashboard → Workers & Pages → Create → Import a repository → pick this repo.
-2. Root directory: `frontend`. Build command: `npm ci && npm run build:demo`. Deploy command: `npx wrangler deploy`.
-3. In the new Worker: Settings → Domains & Routes → Add → Custom domain → `tracker.iakovostifas.com`.
-
-Every push to the connected branch redeploys the demo.
+2. Production branch: `web-demo`. Root directory: `frontend`. Build command: `npm ci && npm run build:demo`. Deploy command: `npx wrangler deploy`.
+3. In the new Worker `apply-tracker-demo`: Settings → Domains & Routes → Add → Custom domain → `tracker.iakovostifas.com`.
 
 ### Desktop app (Windows, macOS, Linux)
 
 `desktop/` wraps the same static build in Electron. Data is saved on the user's computer and the app starts empty.
 
-- Release: push a version tag, e.g. `git tag v0.1.0 && git push origin v0.1.0`. The `Desktop release` GitHub Actions workflow builds the Windows installer (`.exe`), macOS (`.dmg`, `.zip`) and Linux (`.AppImage`) packages and publishes them as one GitHub Release.
-- Updates: installed apps check the latest GitHub Release on launch, download new versions in the background and offer to restart. Bump the tag (`v0.1.1`, ...) to ship an update.
+- Releases: the `Desktop release` workflow builds the installer for the pushed platform branch and adds it to the GitHub Release named after `version` in `desktop/package.json` (e.g. `v0.1.0`).
+- Updates: bump `version` in `desktop/package.json` on `main`, then push `main` to the platform branches. Installed apps check the latest release on launch, download the update and offer to restart.
 - Builds are unsigned for now, so Windows SmartScreen and macOS Gatekeeper show a warning on first launch. macOS auto-update needs a signed app; Windows and Linux auto-update work unsigned.
 - Local test: `cd desktop && npm ci && npm run build:web && npm start`.
 
