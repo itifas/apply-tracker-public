@@ -1,6 +1,6 @@
 "use client";
 
-import { InProgressBadge, useComingSoon } from "@/components/feedback/in-progress";
+import { ComingSoon, InProgressBadge, useComingSoon } from "@/components/feedback/in-progress";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { format, parseISO, isPast, isToday, isTomorrow } from "date-fns";
@@ -651,41 +651,47 @@ export default function RemindersPage() {
 								Calendar Integration
 							</h2>
 							<div className="space-y-3">
-								<button
-									onClick={comingSoon("Google Calendar sync")}
-									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
+								<ComingSoon
+									label="Calendar sync: coming soon"
+									description="Syncing follow-ups to Google Calendar or Outlook is coming soon. Export ICS below works today."
+									className="rounded-2xl"
 								>
-									<div className="flex items-center gap-3">
-										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-semibold text-onPrimary">
-											G
-										</div>
-										<div className="text-left">
-											<p className="text-sm font-medium text-textMain">
-												Google Calendar
-											</p>
-											<p className="text-xs text-textSoft">Coming soon</p>
-										</div>
-									</div>
-									<InProgressBadge />
-								</button>
+									<div className="space-y-3">
+										<button
+											onClick={comingSoon("Google Calendar sync")}
+											className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
+										>
+											<div className="flex items-center gap-3">
+												<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-semibold text-onPrimary">
+													G
+												</div>
+												<div className="text-left">
+													<p className="text-sm font-medium text-textMain">
+														Google Calendar
+													</p>
+													<p className="text-xs text-textSoft">Coming soon</p>
+												</div>
+											</div>
+										</button>
 
-								<button
-									onClick={comingSoon("Outlook Calendar sync")}
-									className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
-								>
-									<div className="flex items-center gap-3">
-										<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary font-semibold text-onPrimary">
-											O
-										</div>
-										<div className="text-left">
-											<p className="text-sm font-medium text-textMain">
-												Outlook Calendar
-											</p>
-											<p className="text-xs text-textSoft">Coming soon</p>
-										</div>
+										<button
+											onClick={comingSoon("Outlook Calendar sync")}
+											className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface p-3 transition-colors hover:bg-surfaceAlt"
+										>
+											<div className="flex items-center gap-3">
+												<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary font-semibold text-onPrimary">
+													O
+												</div>
+												<div className="text-left">
+													<p className="text-sm font-medium text-textMain">
+														Outlook Calendar
+													</p>
+													<p className="text-xs text-textSoft">Coming soon</p>
+												</div>
+											</div>
+										</button>
 									</div>
-									<InProgressBadge />
-								</button>
+								</ComingSoon>
 
 								<button
 									onClick={exportICS}

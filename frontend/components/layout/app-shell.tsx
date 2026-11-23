@@ -12,7 +12,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 	const closeMenu = useCallback(() => setMenuOpen(false), []);
 
 	return (
-		<div className="flex min-h-screen overflow-x-hidden bg-background text-textMain">
+		// overflow-x-clip (not hidden) so the sticky sidebar stays in view.
+		<div className="flex min-h-screen overflow-x-clip bg-background text-textMain">
 			<Sidebar open={menuOpen} onClose={closeMenu} />
 			<div className="flex min-w-0 flex-1 flex-col">
 				<DemoBanner />

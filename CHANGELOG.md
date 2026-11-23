@@ -4,6 +4,9 @@ All notable changes to Apply Tracker. Versions match the git tags and the deskto
 
 ## Unreleased
 
+- "Coming soon" roadworks tape across features that aren't built yet (Email, calendar sync, notifications, reminder defaults, keyboard shortcuts, account). The section underneath is dimmed and can't be used; the stripes drift slowly and stay still with reduced motion.
+- The sidebar stays in view while scrolling long pages.
+- Due follow-up markers sit inside the Follow-ups panel instead of on its border.
 - Phones: the sidebar becomes a slide-out menu (menu button in the top bar; Escape, backdrop tap or choosing a page closes it), and the route map stacks each name above its line.
 - Accessibility: every field, dropdown, toggle and icon button has a name; status colours, buttons and links meet WCAG AA contrast in light and dark mode; chart slices are described. Automated checks report no issues on any page.
 - Status labels match the dashboard (Offer, No reply) and use the route-map colours.

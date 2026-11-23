@@ -108,7 +108,7 @@ export function Sidebar({
 				aria-label="Navigation"
 				aria-hidden={hidden || undefined}
 				{...(isDrawer && open ? { role: "dialog", "aria-modal": true } : {})}
-				className="nav-drawer fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-72 max-w-[85vw] shrink-0 flex-col border-r border-border bg-surface lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:w-60"
+				className="nav-drawer fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-72 max-w-[85vw] shrink-0 flex-col border-r border-border bg-surface lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:w-60 lg:self-start"
 			>
 			<div className="flex items-center justify-between gap-3 pb-8 pr-3 pt-7">
 				<Link

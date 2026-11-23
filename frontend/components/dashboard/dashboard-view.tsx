@@ -226,7 +226,7 @@ export function DashboardView() {
 													{due && (
 														<span
 															aria-hidden="true"
-															className="absolute -left-5 bottom-2 top-2 w-[4px] rounded-full bg-[var(--signal)] sm:-left-8"
+															className="absolute -left-3 bottom-3 top-3 w-[3px] rounded-full bg-[var(--signal)] sm:-left-4"
 														/>
 													)}
 													<span className="text-center leading-none tabular-nums">

@@ -1,6 +1,6 @@
 "use client";
 
-import { InProgressBadge, useComingSoon } from "@/components/feedback/in-progress";
+import { ComingSoon, useComingSoon } from "@/components/feedback/in-progress";
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -215,98 +215,102 @@ export default function SettingsPage() {
 					</div>
 				</div>
 
-				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
-					<div className="mb-4 flex items-center gap-2">
-						<Bell className="text-primary" size={20} />
-						<h2 className="text-lg font-semibold text-textMain">
-							Notification Preferences
-						</h2>
-					</div>
-					<div className="space-y-3">
-						{[
-							{
-								title: "Application updates",
-								desc: "Get notified when application status changes",
-								on: true,
-							},
-							{
-								title: "Upcoming reminders",
-								desc: "Notify me about upcoming follow-ups",
-								on: true,
-							},
-							{
-								title: "Email notifications",
-								desc: "Receive email summaries",
-								on: false,
-							},
-							{
-								title: "Weekly digest",
-								desc: "Get weekly application summary",
-								on: true,
-							},
-						].map((notification) => (
-							<div
-								key={notification.title}
-								className="flex items-center justify-between rounded-lg bg-surfaceAlt p-3"
-							>
-								<div>
-									<p className="text-sm font-medium text-textMain">
-										{notification.title}
-									</p>
-									<p className="text-xs text-textSoft">{notification.desc}</p>
+				<ComingSoon label="Notifications: coming soon" description="Email and browser notifications are coming soon." className="rounded-xl">
+					<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
+						<div className="mb-4 flex items-center gap-2">
+							<Bell className="text-primary" size={20} />
+							<h2 className="text-lg font-semibold text-textMain">
+								Notification Preferences
+							</h2>
+						</div>
+						<div className="space-y-3">
+							{[
+								{
+									title: "Application updates",
+									desc: "Get notified when application status changes",
+									on: true,
+								},
+								{
+									title: "Upcoming reminders",
+									desc: "Notify me about upcoming follow-ups",
+									on: true,
+								},
+								{
+									title: "Email notifications",
+									desc: "Receive email summaries",
+									on: false,
+								},
+								{
+									title: "Weekly digest",
+									desc: "Get weekly application summary",
+									on: true,
+								},
+							].map((notification) => (
+								<div
+									key={notification.title}
+									className="flex items-center justify-between rounded-lg bg-surfaceAlt p-3"
+								>
+									<div>
+										<p className="text-sm font-medium text-textMain">
+											{notification.title}
+										</p>
+										<p className="text-xs text-textSoft">{notification.desc}</p>
+									</div>
+									<label className="relative inline-flex cursor-pointer items-center">
+										<input
+											type="checkbox"
+											aria-label={notification.title}
+											className="peer sr-only"
+											defaultChecked={notification.on}
+										/>
+										<div className="peer h-6 w-11 rounded-full border border-border bg-surface transition after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-border after:bg-white after:transition-all peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 peer-checked:bg-primary peer-checked:after:translate-x-full" />
+									</label>
 								</div>
-								<label className="relative inline-flex cursor-pointer items-center">
-									<input
-										type="checkbox"
-										aria-label={notification.title}
-										className="peer sr-only"
-										defaultChecked={notification.on}
-									/>
-									<div className="peer h-6 w-11 rounded-full border border-border bg-surface transition after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-border after:bg-white after:transition-all peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 peer-checked:bg-primary peer-checked:after:translate-x-full" />
-								</label>
-							</div>
-						))}
+							))}
+						</div>
 					</div>
-				</div>
+				</ComingSoon>
 
-				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
-					<div className="mb-4 flex items-center gap-2">
-						<Calendar className="text-primary" size={20} />
-						<h2 className="text-lg font-semibold text-textMain">
-							Reminder Defaults
-						</h2>
-					</div>
-					<div className="space-y-4">
-						<div>
-							<label
-								htmlFor="default-follow-up"
-								className="mb-2 block text-sm font-medium text-textMain"
-							>
-								Default follow-up time
-							</label>
-							<select id="default-follow-up" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
-								<option>3 days after applying</option>
-								<option>5 days after applying</option>
-								<option>7 days after applying</option>
-								<option>14 days after applying</option>
-							</select>
+				<ComingSoon label="Reminder defaults: coming soon" description="Choosing default follow-up timing is coming soon." className="rounded-xl">
+					<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
+						<div className="mb-4 flex items-center gap-2">
+							<Calendar className="text-primary" size={20} />
+							<h2 className="text-lg font-semibold text-textMain">
+								Reminder Defaults
+							</h2>
 						</div>
-						<div>
-							<label
-								htmlFor="reminder-time"
-								className="mb-2 block text-sm font-medium text-textMain"
-							>
-								Reminder time of day
-							</label>
-							<select id="reminder-time" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
-								<option>9:00 AM</option>
-								<option>12:00 PM</option>
-								<option>3:00 PM</option>
-								<option>6:00 PM</option>
-							</select>
+						<div className="space-y-4">
+							<div>
+								<label
+									htmlFor="default-follow-up"
+									className="mb-2 block text-sm font-medium text-textMain"
+								>
+									Default follow-up time
+								</label>
+								<select id="default-follow-up" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
+									<option>3 days after applying</option>
+									<option>5 days after applying</option>
+									<option>7 days after applying</option>
+									<option>14 days after applying</option>
+								</select>
+							</div>
+							<div>
+								<label
+									htmlFor="reminder-time"
+									className="mb-2 block text-sm font-medium text-textMain"
+								>
+									Reminder time of day
+								</label>
+								<select id="reminder-time" className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary">
+									<option>9:00 AM</option>
+									<option>12:00 PM</option>
+									<option>3:00 PM</option>
+									<option>6:00 PM</option>
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
+				</ComingSoon>
 
 				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
 					<h2 className="mb-4 text-lg font-semibold text-textMain">
@@ -357,33 +361,35 @@ export default function SettingsPage() {
 					</div>
 				</div>
 
-				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
-					<div className="mb-4 flex items-center gap-2">
-						<Keyboard className="text-highlight" size={20} />
-						<h2 className="text-lg font-semibold text-textMain">
-							Keyboard Shortcuts
-						</h2>
+				<ComingSoon label="Shortcuts: coming soon" description="Keyboard shortcuts are coming soon." className="rounded-xl">
+					<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
+						<div className="mb-4 flex items-center gap-2">
+							<Keyboard className="text-highlight" size={20} />
+							<h2 className="text-lg font-semibold text-textMain">
+								Keyboard Shortcuts
+							</h2>
+						</div>
+						<div className="space-y-3">
+							{[
+								{ action: "Add new application", key: "Ctrl + N" },
+								{ action: "Search applications", key: "Ctrl + K" },
+								{ action: "Go to dashboard", key: "G then D" },
+								{ action: "Go to applications", key: "G then A" },
+								{ action: "Open settings", key: "Ctrl + ," },
+							].map((shortcut, index, shortcuts) => (
+								<div
+									key={shortcut.key}
+									className={`flex items-center justify-between py-2 ${index < shortcuts.length - 1 ? "border-b border-border" : ""}`}
+								>
+									<span className="text-sm text-textMain">{shortcut.action}</span>
+									<kbd className="rounded border border-border bg-surfaceAlt px-2 py-1 font-mono text-xs text-textMain">
+										{shortcut.key}
+									</kbd>
+								</div>
+							))}
+						</div>
 					</div>
-					<div className="space-y-3">
-						{[
-							{ action: "Add new application", key: "Ctrl + N" },
-							{ action: "Search applications", key: "Ctrl + K" },
-							{ action: "Go to dashboard", key: "G then D" },
-							{ action: "Go to applications", key: "G then A" },
-							{ action: "Open settings", key: "Ctrl + ," },
-						].map((shortcut, index, shortcuts) => (
-							<div
-								key={shortcut.key}
-								className={`flex items-center justify-between py-2 ${index < shortcuts.length - 1 ? "border-b border-border" : ""}`}
-							>
-								<span className="text-sm text-textMain">{shortcut.action}</span>
-								<kbd className="rounded border border-border bg-surfaceAlt px-2 py-1 font-mono text-xs text-textMain">
-									{shortcut.key}
-								</kbd>
-							</div>
-						))}
-					</div>
-				</div>
+				</ComingSoon>
 
 				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
 					<h2 className="mb-4 text-lg font-semibold text-textMain">
@@ -443,48 +449,49 @@ export default function SettingsPage() {
 					</div>
 				</div>
 
-				<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
-					<h2 className="mb-4 text-lg font-semibold text-textMain">
-						Account
-						<InProgressBadge />
-					</h2>
-					<div className="space-y-4">
-						<div>
-							<label
-								htmlFor="account-name"
-								className="mb-2 block text-sm font-medium text-textMain"
+				<ComingSoon label="Accounts: coming soon" description="Account details arrive with the optional online version." className="rounded-xl">
+					<div className="bg-surface rounded-xl border border-border p-6 shadow-sm">
+						<h2 className="mb-4 text-lg font-semibold text-textMain">
+							Account
+						</h2>
+						<div className="space-y-4">
+							<div>
+								<label
+									htmlFor="account-name"
+									className="mb-2 block text-sm font-medium text-textMain"
+								>
+									Name
+								</label>
+								<input
+									id="account-name"
+									type="text"
+									defaultValue="Alex Student"
+									className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="account-email"
+									className="mb-2 block text-sm font-medium text-textMain"
+								>
+									Email
+								</label>
+								<input
+									id="account-email"
+									type="email"
+									defaultValue="alex@university.edu"
+									className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
+								/>
+							</div>
+							<button
+								onClick={comingSoon("Saving account details")}
+								className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover"
 							>
-								Name
-							</label>
-							<input
-								id="account-name"
-								type="text"
-								defaultValue="Alex Student"
-								className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
-							/>
+								Save Changes
+							</button>
 						</div>
-						<div>
-							<label
-								htmlFor="account-email"
-								className="mb-2 block text-sm font-medium text-textMain"
-							>
-								Email
-							</label>
-							<input
-								id="account-email"
-								type="email"
-								defaultValue="alex@university.edu"
-								className="w-full rounded-lg border border-border bg-background px-4 py-2 text-textMain focus:outline-none focus:ring-2 focus:ring-primary"
-							/>
-						</div>
-						<button
-							onClick={comingSoon("Saving account details")}
-							className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-onPrimary transition-colors hover:bg-primaryHover"
-						>
-							Save Changes
-						</button>
 					</div>
-				</div>
+				</ComingSoon>
 			</div>
 		</AppShell>
 	);

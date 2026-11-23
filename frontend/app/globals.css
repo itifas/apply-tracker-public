@@ -469,6 +469,104 @@ body {
 		}
 	}
 
+	/* "Works ahead" tape for unfinished features. Stripes are navy on
+	   signal yellow in both themes. The stripes drift slowly (constant
+	   motion, so linear); a tape across a section settles in once. */
+	.caution-tape {
+		--tape-ink: #14202b;
+		--tape-yellow: #f2c230;
+		--tape-period: 33.94px; /* 24px stripe pair at 45deg, measured along x */
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 40px;
+		overflow: hidden;
+		background: var(--tape-yellow);
+		color: var(--tape-ink);
+	}
+
+	.caution-tape::before {
+		content: "";
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: calc(100% + var(--tape-period));
+		background: repeating-linear-gradient(
+			-45deg,
+			var(--tape-ink) 0 12px,
+			var(--tape-yellow) 12px 24px
+		);
+		animation: tape-drift 1.8s linear infinite;
+	}
+
+	.caution-tape__label {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		border-radius: 4px;
+		background: var(--tape-yellow);
+		padding: 3px 12px 2px;
+		font-size: 14px;
+		font-weight: 800;
+		box-shadow: 0 0 0 3px var(--tape-yellow);
+	}
+
+	.caution-tape--across {
+		width: 116%;
+		box-shadow:
+			0 1px 0 rgb(20 32 43 / 0.25),
+			0 10px 24px -12px rgb(20 32 43 / 0.45);
+		transform: rotate(-4deg);
+		animation: tape-in 420ms var(--ease-out) both;
+	}
+
+	.caution-tape--strip {
+		height: 36px;
+	}
+
+	.caution-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		margin-left: 8px;
+		vertical-align: middle;
+		border: 2px solid transparent;
+		border-radius: 999px;
+		padding: 0 8px;
+		font-size: 11px;
+		font-weight: 800;
+		line-height: 18px;
+		color: #14202b;
+		background:
+			linear-gradient(#f2c230, #f2c230) padding-box,
+			repeating-linear-gradient(-45deg, #14202b 0 3px, #f2c230 3px 6px)
+				border-box;
+	}
+
+	@keyframes tape-drift {
+		to {
+			transform: translateX(calc(-1 * var(--tape-period)));
+		}
+	}
+
+	@keyframes tape-in {
+		from {
+			opacity: 0;
+			transform: rotate(-4deg) translateX(-4%) scaleX(0.97);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.caution-tape::before {
+			animation: none;
+		}
+
+		.caution-tape--across {
+			animation: route-fade 150ms ease both;
+		}
+	}
+
 	@keyframes route-fade {
 		from {
 			opacity: 0;
